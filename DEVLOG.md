@@ -30,3 +30,4 @@
 - Action: refactor: update constants at 2026-06-02T14:02:49.649Z
 - Action: style: improve hooks at 2026-06-02T17:57:44.290Z
 - Action: docs: remove constants at 2026-06-02T19:01:20.166Z
+- Action: chore: tweak config at 2026-06-02T19:26:53.520Z
