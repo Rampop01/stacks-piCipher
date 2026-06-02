@@ -26,3 +26,4 @@
 - Action: docs: fix hooks at 2026-06-02T08:39:29.438Z
 - Action: fix: improve button states at 2026-06-02T10:28:24.656Z
 - Action: style: tweak wallet connection at 2026-06-02T12:59:45.518Z
+- Action: refactor: fix tests at 2026-06-02T13:02:59.531Z
