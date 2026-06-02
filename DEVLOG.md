@@ -19,3 +19,4 @@
 - Action: chore: improve wallet connection at 2026-06-01T23:31:44.782Z
 - Action: fix: add button states at 2026-06-02T01:01:19.223Z
 - Action: chore: improve error handling at 2026-06-02T01:31:27.004Z
+- Action: refactor: adjust error handling at 2026-06-02T01:54:47.487Z
