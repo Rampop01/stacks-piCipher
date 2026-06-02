@@ -28,3 +28,4 @@
 - Action: style: tweak wallet connection at 2026-06-02T12:59:45.518Z
 - Action: refactor: fix tests at 2026-06-02T13:02:59.531Z
 - Action: refactor: update constants at 2026-06-02T14:02:49.649Z
+- Action: style: improve hooks at 2026-06-02T17:57:44.290Z
