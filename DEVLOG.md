@@ -74,3 +74,4 @@
 - Action: docs: fix styling at 2026-06-04T20:07:26.852Z
 - Action: style: tweak documentation at 2026-06-04T20:44:07.350Z
 - Action: style: improve tests at 2026-06-04T20:48:27.875Z
+- Action: docs: add auth logic at 2026-06-04T21:50:14.804Z
