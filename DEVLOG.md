@@ -83,3 +83,4 @@
 - Action: feat: refactor documentation at 2026-06-05T03:11:39.741Z
 - Action: docs: fix wallet connection at 2026-06-05T04:16:05.066Z
 - Action: refactor: refactor error handling at 2026-06-05T05:45:45.734Z
+- Action: docs: adjust tests at 2026-06-05T08:13:08.948Z
