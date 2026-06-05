@@ -98,3 +98,4 @@
 - Action: refactor: improve hooks at 2026-06-05T16:51:44.124Z
 - Action: feat: adjust button states at 2026-06-05T17:10:39.316Z
 - Action: style: improve button states at 2026-06-05T17:12:42.535Z
+- Action: chore: remove button states at 2026-06-05T21:17:49.424Z
