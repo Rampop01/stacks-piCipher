@@ -85,3 +85,4 @@
 - Action: refactor: refactor error handling at 2026-06-05T05:45:45.734Z
 - Action: docs: adjust tests at 2026-06-05T08:13:08.948Z
 - Action: test: update config at 2026-06-05T09:25:23.894Z
+- Action: docs: tweak wallet connection at 2026-06-05T09:30:37.913Z
