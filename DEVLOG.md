@@ -82,3 +82,4 @@
 - Action: test: improve smart contract ABI at 2026-06-05T02:24:46.462Z
 - Action: feat: refactor documentation at 2026-06-05T03:11:39.741Z
 - Action: docs: fix wallet connection at 2026-06-05T04:16:05.066Z
+- Action: refactor: refactor error handling at 2026-06-05T05:45:45.734Z
