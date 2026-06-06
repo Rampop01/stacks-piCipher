@@ -51,6 +51,39 @@
     )
 )
 
+(define-public (submit-answer (round-id uint) (answer (string-ascii 50)))
+    (let
+        (
+            (round-data (unwrap! (map-get? GameRounds round-id) err-not-found))
+            (player tx-sender)
+            (stats (get-player-stats player))
+            (is-correct (is-eq (sha256 answer) (get answer-hash round-data)))
+            (points-earned (if is-correct (* (get mode round-data) u10) u0))
+        )
+        (asserts! (get is-active round-data) err-inactive-round)
+        (asserts! (is-none (map-get? HasPlayed { player: player, round-id: round-id })) err-already-played)
+        
+        (map-set HasPlayed { player: player, round-id: round-id } true)
+        
+        ;; Update player stats
+        (if is-correct
+            (map-set PlayerStats player {
+                total-score: (+ (get total-score stats) points-earned),
+                current-streak: (+ (get current-streak stats) u1),
+                best-streak: (if (> (+ (get current-streak stats) u1) (get best-streak stats)) (+ (get current-streak stats) u1) (get best-streak stats)),
+                games-played: (+ (get games-played stats) u1)
+            })
+            (map-set PlayerStats player {
+                total-score: (get total-score stats),
+                current-streak: u0,
+                best-streak: (get best-streak stats),
+                games-played: (+ (get games-played stats) u1)
+            })
+        )
+        (ok is-correct)
+    )
+)
+
 ;; Read-only Functions
 (define-read-only (get-player-stats (player principal))
     (default-to 
