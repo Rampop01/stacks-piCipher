@@ -9,3 +9,24 @@
 (define-constant err-inactive-round (err u103))
 
 ;; Data Maps
+(define-map PlayerStats principal 
+    { 
+        total-score: uint, 
+        current-streak: uint, 
+        best-streak: uint, 
+        games-played: uint 
+    }
+)
+
+(define-map GameRounds uint 
+    { 
+        mode: uint, 
+        answer-hash: (buff 32), 
+        is-active: bool 
+    }
+)
+
+(define-map HasPlayed { player: principal, round-id: uint } bool)
+
+;; Data Variables
+(define-data-var current-round-id uint u0)
