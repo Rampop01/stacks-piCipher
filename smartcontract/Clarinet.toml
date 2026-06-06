@@ -1,0 +1,11 @@
+[project]
+name = "piccipher-stacks"
+description = "PicCipher Game Contract"
+authors = []
+telemetry = false
+requirements = []
+
+[contracts.piccipher-game]
+path = "contracts/piccipher-game.clar"
+clarity_version = 2
+epoch = 2.4
