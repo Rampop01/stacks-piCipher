@@ -106,3 +106,4 @@
 - Action: style: fix smart contract ABI at 2026-06-06T01:33:05.342Z
 - Action: fix: cleanup styling at 2026-06-06T03:58:57.580Z
 - Action: feat: tweak error handling at 2026-06-06T05:33:55.793Z
+- Action: feat: tweak smart contract ABI at 2026-06-06T06:12:34.235Z
