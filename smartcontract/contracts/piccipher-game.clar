@@ -66,7 +66,7 @@
     )
 )
 
-(define-public (submit-answer (round-id uint) (answer (string-ascii 50)))
+(define-public (submit-answer (round-id uint) (answer (buff 50)))
     (let
         (
             (round-data (unwrap! (map-get? GameRounds round-id) err-not-found))
