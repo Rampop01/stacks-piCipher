@@ -46,8 +46,23 @@
             is-active: true
         })
         
+        (print { event: "round-created", round-id: new-id, mode: mode })
         (var-set current-round-id new-id)
         (ok new-id)
+    )
+)
+
+(define-public (deactivate-round (round-id uint))
+    (let
+        (
+            (round-data (unwrap! (map-get? GameRounds round-id) err-not-found))
+        )
+        (asserts! (is-eq tx-sender contract-owner) err-owner-only)
+        (asserts! (get is-active round-data) err-inactive-round)
+        
+        (map-set GameRounds round-id (merge round-data { is-active: false }))
+        (print { event: "round-deactivated", round-id: round-id })
+        (ok true)
     )
 )
 
@@ -80,6 +95,7 @@
                 games-played: (+ (get games-played stats) u1)
             })
         )
+        (print { event: "answer-submitted", player: player, round-id: round-id, is-correct: is-correct, points-earned: points-earned })
         (ok is-correct)
     )
 )
