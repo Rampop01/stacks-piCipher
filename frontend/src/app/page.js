@@ -3,13 +3,17 @@
 import { useState, useEffect } from "react";
 import { AppConfig, UserSession, showConnect } from "@stacks/connect";
 
-const appConfig = new AppConfig(["store_write", "publish_data"]);
-export const userSession = new UserSession({ appConfig });
+let userSession;
+if (typeof window !== "undefined") {
+  const appConfig = new AppConfig(["store_write", "publish_data"]);
+  userSession = new UserSession({ appConfig });
+}
 
 export default function Home() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    if (!userSession) return;
     if (userSession.isSignInPending()) {
       userSession.handlePendingSignIn().then((userData) => {
         setUserData(userData);
@@ -20,6 +24,7 @@ export default function Home() {
   }, []);
 
   const authenticate = () => {
+    if (!userSession) return;
     showConnect({
       appDetails: {
         name: "PicCipher",
@@ -34,6 +39,7 @@ export default function Home() {
   };
 
   const disconnect = () => {
+    if (!userSession) return;
     userSession.signUserOut("/");
     setUserData(null);
   };
