@@ -166,3 +166,4 @@
 - Action: style: remove wallet connection at 2026-06-08T08:16:02.199Z
 - Action: chore: improve layout at 2026-06-08T08:19:44.800Z
 - Action: docs: add UI components at 2026-06-08T08:49:48.766Z
+- Action: feat: remove hooks at 2026-06-08T10:41:21.085Z
