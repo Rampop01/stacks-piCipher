@@ -1,109 +1,145 @@
 ;; piccipher-game
-;; A picture-word guessing game for Stacks
+;; A picture-word guessing game for Stacks - RPG Campaign Edition
 
 ;; Constants
 (define-constant contract-owner tx-sender)
 (define-constant err-owner-only (err u100))
 (define-constant err-not-found (err u101))
-(define-constant err-already-played (err u102))
-(define-constant err-inactive-round (err u103))
+(define-constant err-already-registered (err u102))
+(define-constant err-not-registered (err u103))
+(define-constant err-stage-not-available (err u104))
+(define-constant err-incorrect-answer (err u105))
+(define-constant err-payment-failed (err u106))
+
+(define-constant bypass-fee u50000) ;; 0.05 STX
+(define-constant hint-fee u10000)   ;; 0.01 STX
 
 ;; Data Maps
-(define-map PlayerStats principal 
+(define-map PlayerProfiles principal 
     { 
-        total-score: uint, 
-        current-streak: uint, 
-        best-streak: uint, 
-        games-played: uint 
+        nickname: (string-ascii 50), 
+        current-stage: uint
     }
 )
 
-(define-map GameRounds uint 
-    { 
-        mode: uint, 
-        answer-hash: (buff 32), 
-        is-active: bool 
-    }
-)
-
-(define-map HasPlayed { player: principal, round-id: uint } bool)
+(define-map StageAnswerHashes uint (buff 32))
 
 ;; Data Variables
-(define-data-var current-round-id uint u0)
+(define-data-var next-token-id uint u1)
+
+;; NFT Definition (Beginner Badge & Milestones)
+(define-non-fungible-token hacker-badge uint)
 
 ;; Public Functions
-(define-public (create-round (mode uint) (answer-hash (buff 32)))
-    (let
-        (
-            (new-id (+ (var-get current-round-id) u1))
-        )
-        (asserts! (is-eq tx-sender contract-owner) err-owner-only)
-        (asserts! (and (>= mode u1) (<= mode u4)) (err u104))
-        
-        (map-set GameRounds new-id {
-            mode: mode,
-            answer-hash: answer-hash,
-            is-active: true
-        })
-        
-        (print { event: "round-created", round-id: new-id, mode: mode })
-        (var-set current-round-id new-id)
-        (ok new-id)
-    )
-)
 
-(define-public (deactivate-round (round-id uint))
-    (let
-        (
-            (round-data (unwrap! (map-get? GameRounds round-id) err-not-found))
-        )
+;; Admin: Set stage answers
+(define-public (set-stage-answer-hash (stage-id uint) (answer-hash (buff 32)))
+    (begin
         (asserts! (is-eq tx-sender contract-owner) err-owner-only)
-        (asserts! (get is-active round-data) err-inactive-round)
-        
-        (map-set GameRounds round-id (merge round-data { is-active: false }))
-        (print { event: "round-deactivated", round-id: round-id })
+        (map-set StageAnswerHashes stage-id answer-hash)
         (ok true)
     )
 )
 
-(define-public (submit-answer (round-id uint) (answer (buff 50)))
+;; Player Registration
+(define-public (register (nickname (string-ascii 50)))
     (let
         (
-            (round-data (unwrap! (map-get? GameRounds round-id) err-not-found))
-            (player tx-sender)
-            (stats (get-player-stats player))
-            (is-correct (is-eq (sha256 answer) (get answer-hash round-data)))
-            (points-earned (if is-correct (* (get mode round-data) u10) u0))
+            (token-id (var-get next-token-id))
         )
-        (asserts! (get is-active round-data) err-inactive-round)
-        (asserts! (is-none (map-get? HasPlayed { player: player, round-id: round-id })) err-already-played)
+        (asserts! (is-none (map-get? PlayerProfiles tx-sender)) err-already-registered)
+        (asserts! (> (len nickname) u0) (err u107))
         
-        (map-set HasPlayed { player: player, round-id: round-id } true)
-        
-        ;; Update player stats
-        (if is-correct
-            (map-set PlayerStats player {
-                total-score: (+ (get total-score stats) points-earned),
-                current-streak: (+ (get current-streak stats) u1),
-                best-streak: (if (> (+ (get current-streak stats) u1) (get best-streak stats)) (+ (get current-streak stats) u1) (get best-streak stats)),
-                games-played: (+ (get games-played stats) u1)
-            })
-            (map-set PlayerStats player {
-                total-score: (get total-score stats),
-                current-streak: u0,
-                best-streak: (get best-streak stats),
-                games-played: (+ (get games-played stats) u1)
-            })
+        ;; Save Profile
+        (map-set PlayerProfiles tx-sender {
+            nickname: nickname,
+            current-stage: u1
+        })
+
+        ;; Mint Beginner Badge
+        (try! (nft-mint? hacker-badge token-id tx-sender))
+        (var-set next-token-id (+ token-id u1))
+
+        (print { event: "player-registered", player: tx-sender, nickname: nickname, token-id: token-id })
+        (ok token-id)
+    )
+)
+
+;; Submit Answer for current stage
+(define-public (submit-stage-answer (answer (buff 50)))
+    (let
+        (
+            (profile (unwrap! (map-get? PlayerProfiles tx-sender) err-not-registered))
+            (current-stage (get current-stage profile))
+            (correct-hash (unwrap! (map-get? StageAnswerHashes current-stage) err-stage-not-available))
+            (answer-hash (sha256 answer))
         )
-        (print { event: "answer-submitted", player: player, round-id: round-id, is-correct: is-correct, points-earned: points-earned })
-        (ok is-correct)
+        (asserts! (is-eq answer-hash correct-hash) err-incorrect-answer)
+        
+        (try! (advance-stage tx-sender profile current-stage))
+        (ok true)
+    )
+)
+
+;; Pay to Bypass Stage
+(define-public (bypass-stage)
+    (let
+        (
+            (profile (unwrap! (map-get? PlayerProfiles tx-sender) err-not-registered))
+            (current-stage (get current-stage profile))
+        )
+        (asserts! (is-some (map-get? StageAnswerHashes current-stage)) err-stage-not-available)
+
+        ;; Pay STX fee to admin
+        (try! (stx-transfer? bypass-fee tx-sender contract-owner))
+
+        (print { event: "stage-bypassed", player: tx-sender, stage-id: current-stage })
+        (try! (advance-stage tx-sender profile current-stage))
+        (ok true)
+    )
+)
+
+;; Pay for a hint
+(define-public (buy-hint)
+    (let
+        (
+            (profile (unwrap! (map-get? PlayerProfiles tx-sender) err-not-registered))
+            (current-stage (get current-stage profile))
+        )
+        (asserts! (is-some (map-get? StageAnswerHashes current-stage)) err-stage-not-available)
+
+        ;; Pay STX fee to admin
+        (try! (stx-transfer? hint-fee tx-sender contract-owner))
+
+        (print { event: "hint-purchased", player: tx-sender, stage-id: current-stage })
+        (ok true)
+    )
+)
+
+;; Internal helper to advance stage and mint milestone badges
+(define-private (advance-stage (player principal) (profile { nickname: (string-ascii 50), current-stage: uint }) (completed-stage uint))
+    (let
+        (
+            (next-stage (+ completed-stage u1))
+            (token-id (var-get next-token-id))
+        )
+        (map-set PlayerProfiles player (merge profile { current-stage: next-stage }))
+        (print { event: "stage-completed", player: player, stage-id: completed-stage })
+
+        ;; Mint milestone badges
+        (if (or (is-eq completed-stage u10) (or (is-eq completed-stage u25) (is-eq completed-stage u50)))
+            (begin
+                (try! (nft-mint? hacker-badge token-id player))
+                (var-set next-token-id (+ token-id u1))
+                (print { event: "badge-minted", player: player, stage-id: completed-stage, token-id: token-id })
+                (ok true)
+            )
+            (ok true)
+        )
     )
 )
 
 ;; Read-only Functions
-(define-read-only (get-player-stats (player principal))
-    (default-to 
-        { total-score: u0, current-streak: u0, best-streak: u0, games-played: u0 }
-        (map-get? PlayerStats player)
-    )
+(define-read-only (get-player-profile (player principal))
+    (map-get? PlayerProfiles player)
 )
