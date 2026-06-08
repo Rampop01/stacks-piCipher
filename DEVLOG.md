@@ -167,3 +167,4 @@
 - Action: chore: improve layout at 2026-06-08T08:19:44.800Z
 - Action: docs: add UI components at 2026-06-08T08:49:48.766Z
 - Action: feat: remove hooks at 2026-06-08T10:41:21.085Z
+- Action: feat: adjust constants at 2026-06-08T10:49:42.161Z
