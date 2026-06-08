@@ -1,28 +1,25 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Orbitron } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
   subsets: ["latin"],
 });
 
 export const metadata = {
-  title: "PicCipher (Stacks)",
+  title: "PicCipher",
   description: "A picture-word guessing game on Stacks",
   other: {
-    "talentapp:project_verification": "3ee2ffddf1ab0c6ddeffc35195fd96f1e7f90b23b6580eaa591d09273931532fc0870ba87c5b6beb81cca81f5e7f0956e65dcd56bcb60f1f8e876113af8a3989",
+    "talentapp:project_verification": "9d25ab3ae17b10b809fc45ec76bd66286674724e417d199ad695eb269d7d197d0548b9c60fcecd81b55bd80ca590c04dbf8f541ab59cefd79777bb0b6f428dfc",
   },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${orbitron.variable}`}>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
