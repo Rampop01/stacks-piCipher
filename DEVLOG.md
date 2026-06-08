@@ -156,3 +156,4 @@
 - Action: test: cleanup constants at 2026-06-07T21:11:13.735Z
 - Action: test: remove padding/margins at 2026-06-07T21:52:08.068Z
 - Action: test: adjust auth logic at 2026-06-08T00:08:43.711Z
+- Action: docs: tweak smart contract ABI at 2026-06-08T00:48:00.359Z
