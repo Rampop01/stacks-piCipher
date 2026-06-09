@@ -192,3 +192,4 @@
 - Action: feat: adjust UI components at 2026-06-09T06:46:32.953Z
 - Action: refactor: remove error handling at 2026-06-09T08:05:38.837Z
 - Action: feat: fix UI components at 2026-06-09T09:32:02.387Z
+- Action: docs: optimize smart contract ABI at 2026-06-09T09:58:26.662Z
