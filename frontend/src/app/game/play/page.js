@@ -1,0 +1,427 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { Mic, MicOff, AlertCircle, Play, FastForward, CheckCircle2, Lock, Trophy } from "lucide-react";
+import { GAME_VAULT } from "../../../data/vault";
+import { useConnect } from "@stacks/connect-react";
+import { userSession } from "../../../components/Providers";
+import { STACKS_MAINNET, STACKS_MOCKNET } from "@stacks/network";
+import {
+  fetchCallReadOnlyFunction,
+  cvToJSON,
+  standardPrincipalCV,
+  stringAsciiCV,
+  bufferCVFromString,
+  PostConditionMode,
+  Pc,
+  FungibleConditionCode
+} from "@stacks/transactions";
+
+
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "SP1BTBG1TW13NEV2FQM7HC1BZ9XZV7FZSGPMVV38M";
+const CONTRACT_NAME = "piccipher-game-v2";
+const NETWORK = STACKS_MAINNET;
+
+export default function GamePlay() {
+  const router = useRouter();
+  const { doContractCall } = useConnect();
+
+  // State
+  const [profile, setProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [nicknameInput, setNicknameInput] = useState("");
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [currentStageData, setCurrentStageData] = useState(null);
+  const [showHint, setShowHint] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [transcript, setTranscript] = useState("");
+  const [feedback, setFeedback] = useState({ type: "", message: "" });
+
+  // Refs
+  const recognitionRef = useRef(null);
+
+  useEffect(() => {
+    if (userSession.isUserSignedIn()) {
+      loadProfile();
+    } else {
+      router.push("/");
+    }
+  }, []);
+
+  const loadProfile = async () => {
+    try {
+      setIsLoading(true);
+      const userData = userSession.loadUserData();
+      const userAddress = userData.profile.stxAddress.mainnet;
+
+      const result = await fetchCallReadOnlyFunction({
+        network: NETWORK,
+        contractAddress: CONTRACT_ADDRESS,
+        contractName: CONTRACT_NAME,
+        functionName: "get-player-profile",
+        functionArgs: [standardPrincipalCV(userAddress)],
+        senderAddress: userAddress,
+      });
+
+      const profileJSON = cvToJSON(result);
+
+      if (profileJSON.success && profileJSON.value !== null) {
+        // (some (tuple (current-stage u1) (nickname "Hacker")))
+        const nickname = profileJSON.value.value.nickname.value;
+        const currentStage = Number(profileJSON.value.value['current-stage'].value);
+        
+        setProfile({
+          nickname: nickname,
+          currentStage: currentStage
+        });
+        loadStage(currentStage);
+        speakText(`Welcome back to the grid, ${nickname}.`);
+      } else {
+        setProfile({ isRegistered: false });
+        speakText("Unregistered identity detected. Please register a nickname.");
+      }
+    } catch (error) {
+      console.error("Error loading profile", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadStage = (stageId) => {
+    const stage = GAME_VAULT.find(s => s.stageId === stageId);
+    if (stage) {
+      setCurrentStageData(stage);
+      setShowHint(false);
+      setTranscript("");
+    } else {
+      setCurrentStageData({ isComplete: true });
+      speakText("Incredible. You have bypassed all security protocols. Campaign completed.");
+    }
+  };
+
+  const speakText = (text) => {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voices = window.speechSynthesis.getVoices();
+      const engVoice = voices.find(v => v.lang.includes("en-US") && v.name.includes("Google")) || voices[0];
+      utterance.voice = engVoice;
+      utterance.pitch = 0.8;
+      utterance.rate = 1.1;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  const handleRegister = async () => {
+    if (!nicknameInput) return;
+    setIsRegistering(true);
+
+    await doContractCall({
+      network: NETWORK,
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: "register",
+      functionArgs: [stringAsciiCV(nicknameInput)],
+      postConditionMode: PostConditionMode.Deny,
+      postConditions: [],
+      onFinish: (data) => {
+        setFeedback({ type: "success", message: "Identity registered! Waiting for block confirmation..." });
+        speakText(`Identity confirmed. Welcome, ${nicknameInput}.`);
+        // We wait a bit then load profile (though Stacks blocks take 10 mins, we assume fast mocknet or optimistically update)
+        setTimeout(() => loadProfile(), 3000);
+      },
+      onCancel: () => {
+        setIsRegistering(false);
+        setFeedback({ type: "error", message: "Registration cancelled." });
+      }
+    });
+  };
+
+  const toggleListening = () => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+
+    if (!("webkitSpeechRecognition" in window) && !("SpeechRecognition" in window)) {
+      alert("Speech recognition is not supported in this browser. Please type your answer.");
+      return;
+    }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognitionRef.current = new SpeechRecognition();
+    recognitionRef.current.continuous = false;
+    recognitionRef.current.interimResults = false;
+
+    recognitionRef.current.onstart = () => {
+      setIsListening(true);
+      setFeedback({ type: "info", message: "Listening... speak now." });
+    };
+
+    recognitionRef.current.onresult = async (event) => {
+      const current = event.resultIndex;
+      const result = event.results[current][0].transcript.toUpperCase().trim();
+      setTranscript(result);
+      checkAnswer(result);
+    };
+
+    recognitionRef.current.onerror = (event) => {
+      console.error(event.error);
+      setIsListening(false);
+      setFeedback({ type: "error", message: "Voice recognition failed." });
+    };
+
+    recognitionRef.current.onend = () => {
+      setIsListening(false);
+    };
+
+    recognitionRef.current.start();
+  };
+
+  const checkAnswer = async (guess) => {
+    if (!currentStageData) return;
+    if (guess === currentStageData.word) {
+      speakText("Access granted. Impressive hacking.");
+      setFeedback({ type: "success", message: "Correct! Submitting to Stacks blockchain..." });
+      
+      await doContractCall({
+        network: NETWORK,
+        contractAddress: CONTRACT_ADDRESS,
+        contractName: CONTRACT_NAME,
+        functionName: "submit-stage-answer",
+        functionArgs: [bufferCVFromString(guess)],
+        postConditionMode: PostConditionMode.Deny,
+        postConditions: [],
+        onFinish: (data) => {
+          setFeedback({ type: "success", message: "Answer submitted successfully!" });
+          setTimeout(() => loadProfile(), 2000);
+        },
+        onCancel: () => {
+          setFeedback({ type: "error", message: "Submission cancelled." });
+        }
+      });
+    } else {
+      speakText("Incorrect. Security systems alerted.");
+      setFeedback({ type: "error", message: `Incorrect guess: ${guess}` });
+    }
+  };
+
+  const handleBypass = async () => {
+    const userData = userSession.loadUserData();
+    const userAddress = userData.profile.stxAddress.mainnet;
+    const bypassFee = 50000; // 0.05 STX
+    
+    const postCondition = Pc.principal(userAddress).willSendEq(bypassFee).ustx();
+
+    setFeedback({ type: "loading", message: "Processing bypass with STX..." });
+    
+    await doContractCall({
+      network: NETWORK,
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: "bypass-stage",
+      functionArgs: [],
+      postConditionMode: PostConditionMode.Deny,
+      postConditions: [postCondition],
+      onFinish: (data) => {
+        speakText("Stage bypassed using STX.");
+        setFeedback({ type: "success", message: "Stage bypassed! Waiting for block..." });
+        setTimeout(() => loadProfile(), 3000);
+      },
+      onCancel: () => {
+        setFeedback({ type: "error", message: "Bypass cancelled." });
+      }
+    });
+  };
+
+  const handleBuyHint = async () => {
+    const userData = userSession.loadUserData();
+    const userAddress = userData.profile.stxAddress.mainnet;
+    const hintFee = 10000; // 0.01 STX
+    
+    const postCondition = Pc.principal(userAddress).willSendEq(hintFee).ustx();
+
+    setFeedback({ type: "loading", message: "Purchasing hint with STX..." });
+
+    await doContractCall({
+      network: NETWORK,
+      contractAddress: CONTRACT_ADDRESS,
+      contractName: CONTRACT_NAME,
+      functionName: "buy-hint",
+      functionArgs: [],
+      postConditionMode: PostConditionMode.Deny,
+      postConditions: [postCondition],
+      onFinish: (data) => {
+        setShowHint(true);
+        speakText("Hint unlocked.");
+        setFeedback({ type: "success", message: "Hint purchased!" });
+      },
+      onCancel: () => {
+        setFeedback({ type: "error", message: "Hint purchase cancelled." });
+      }
+    });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black text-[#FF5500] flex items-center justify-center font-mono text-xl animate-pulse">
+        [ CONNECTING TO MAINFRAME... ]
+      </div>
+    );
+  }
+
+  if (profile && !profile.isRegistered) {
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
+        <div className="w-full max-w-md p-8 border-2 border-[#FF5500] bg-black/50 backdrop-blur shadow-[0_0_30px_rgba(255,85,0,0.2)]">
+          <h2 className="text-3xl font-black mb-6 text-[#FF5500]">REGISTER IDENTITY</h2>
+          <p className="text-neutral-400 mb-8 font-mono text-sm">
+            You must mint your Beginner Badge NFT to enter the grid. Enter a hacker alias below.
+          </p>
+          <input 
+            type="text" 
+            value={nicknameInput}
+            onChange={(e) => setNicknameInput(e.target.value)}
+            placeholder="NICKNAME" 
+            className="w-full bg-transparent border-b-2 border-[#FF5500]/50 focus:border-[#FF5500] outline-none py-3 text-xl font-mono text-[#FF5500] placeholder:text-[#FF5500]/30 mb-8"
+          />
+          <button 
+            onClick={handleRegister}
+            disabled={isRegistering || !nicknameInput}
+            className="w-full gaming-btn py-4 border border-[#FF5500] text-[#FF5500] font-bold hover:bg-[#FF5500] hover:text-black disabled:opacity-50"
+          >
+            {isRegistering ? "[ MINTING... ]" : "[ INITIALIZE ]"}
+          </button>
+          
+          {feedback.message && (
+            <p className={`mt-4 font-mono text-sm ${feedback.type === 'error' ? 'text-red-500' : 'text-[#FF5500]'}`}>
+              &gt; {feedback.message}
+            </p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (currentStageData?.isComplete) {
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
+        <Trophy className="w-24 h-24 text-yellow-500 mb-8 animate-bounce" />
+        <h1 className="text-5xl font-black text-yellow-500 mb-4">CAMPAIGN COMPLETE</h1>
+        <p className="text-xl text-neutral-400 font-mono text-center">
+          You have successfully hacked all stages on the Stacks network. <br/> Your NFT Badges prove your dominance.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-black text-white pb-24">
+      {/* Top HUD */}
+      <div className="w-full border-b border-[#FF5500]/30 bg-black/80 backdrop-blur sticky top-0 z-50 p-4 flex justify-between items-center font-mono">
+        <div className="flex items-center gap-4">
+          <span className="text-[#FF5500] font-bold tracking-widest uppercase">
+            {profile?.nickname || "UNKNOWN"}
+          </span>
+        </div>
+        <div className="text-xl font-black text-white drop-shadow-[0_0_5px_#FF5500]">
+          STAGE {profile?.currentStage}
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto p-4 md:p-8 mt-4">
+        
+        {/* Main Image View */}
+        <div className="w-full aspect-square md:aspect-video border-2 border-[#FF5500]/50 relative group overflow-hidden mb-8 shadow-[0_0_30px_rgba(255,85,0,0.1)]">
+          {currentStageData?.imageUrl ? (
+            <img 
+              src={currentStageData.imageUrl} 
+              alt="Cipher Image" 
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-neutral-900">
+              <Lock className="w-12 h-12 text-[#FF5500]/30" />
+            </div>
+          )}
+          <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-30 mix-blend-overlay"></div>
+        </div>
+
+        {/* Micro-transaction HUD */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <button 
+            onClick={handleBuyHint}
+            className="flex items-center justify-center gap-2 p-3 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 font-mono text-xs md:text-sm transition-all"
+          >
+            <AlertCircle className="w-4 h-4" /> 0.01 STX HINT
+          </button>
+          <button 
+            onClick={handleBypass}
+            className="flex items-center justify-center gap-2 p-3 border border-red-500/50 text-red-500 hover:bg-red-500/10 font-mono text-xs md:text-sm transition-all"
+          >
+            <FastForward className="w-4 h-4" /> 0.05 STX BYPASS
+          </button>
+        </div>
+
+        {/* Hint Display */}
+        {showHint && (
+          <div className="w-full p-4 border-l-4 border-yellow-500 bg-yellow-500/10 text-yellow-200 font-mono mb-8 animate-in fade-in slide-in-from-top-4">
+            &gt; DECRYPTED DATA: {currentStageData?.hint}
+          </div>
+        )}
+
+        {/* Input Area */}
+        <div className="w-full p-6 border border-[#FF5500]/30 bg-black/50 relative">
+          <div className="absolute -top-3 left-4 bg-black px-2 text-xs text-[#FF5500] font-mono">
+            VOICE_OVERRIDE.exe
+          </div>
+          
+          <div className="flex flex-col items-center">
+            <button
+              onClick={toggleListening}
+              className={`w-24 h-24 rounded-full flex items-center justify-center mb-6 transition-all duration-300 ${
+                isListening 
+                  ? "bg-red-500/20 border-2 border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.5)] animate-pulse" 
+                  : "bg-[#FF5500]/10 border-2 border-[#FF5500]/50 hover:border-[#FF5500] hover:shadow-[0_0_20px_rgba(255,85,0,0.3)]"
+              }`}
+            >
+              {isListening ? <Mic className="w-10 h-10 text-red-500" /> : <MicOff className="w-10 h-10 text-[#FF5500]" />}
+            </button>
+
+            <div className="w-full flex justify-center gap-2 mb-4">
+               <input 
+                  type="text" 
+                  value={transcript}
+                  onChange={(e) => setTranscript(e.target.value.toUpperCase())}
+                  placeholder="... AWAITING VOCAL INPUT ..." 
+                  className="w-full max-w-sm bg-transparent border-b-2 border-neutral-700 focus:border-[#FF5500] outline-none py-2 text-center text-xl font-mono text-white placeholder:text-neutral-700"
+                />
+            </div>
+
+            {transcript && !isListening && (
+              <button 
+                onClick={() => checkAnswer(transcript)}
+                className="px-8 py-3 bg-[#FF5500] text-black font-black tracking-widest uppercase hover:bg-white transition-colors flex items-center gap-2"
+              >
+                SUBMIT <CheckCircle2 className="w-5 h-5" />
+              </button>
+            )}
+
+            {feedback.message && (
+              <p className={`mt-6 font-mono text-sm text-center ${
+                feedback.type === 'error' ? 'text-red-500' : 
+                feedback.type === 'success' ? 'text-[#FF5500]' : 
+                'text-yellow-500'
+              }`}>
+                &gt; {feedback.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
