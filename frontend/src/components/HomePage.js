@@ -5,6 +5,7 @@ import { userSession } from "./Providers";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Mic, BrainCircuit, Coins, Trophy, Image as ImageIcon, Zap } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePage() {
   const router = useRouter();
@@ -75,6 +76,9 @@ export default function HomePage() {
                 <span className="hidden md:inline-block px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-mono text-[#FF5500]">
                   {userData?.profile?.stxAddress?.mainnet?.slice(0,6) + '...'}
                 </span>
+                <Link href="/leaderboard" className="hidden md:flex items-center gap-2 text-xs font-mono text-white/70 hover:text-[#FF5500] transition-colors">
+                  <Trophy className="w-4 h-4" /> [RANKINGS]
+                </Link>
                 <button 
                   onClick={logout}
                   className="gaming-btn px-6 py-2 border border-white/20 hover:border-white/60 hover:bg-white/10 text-xs text-white"
@@ -83,12 +87,17 @@ export default function HomePage() {
                 </button>
               </>
             ) : (
-              <button 
-                onClick={login}
-                className="gaming-btn px-6 py-2 border-2 border-[#FF5500] text-[#FF5500] text-sm hover:text-black hover:bg-[#FF5500] shadow-[0_0_15px_rgba(255,85,0,0.2)]"
-              >
-                PLAY NOW
-              </button>
+              <>
+                <Link href="/leaderboard" className="hidden md:flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-white transition-colors mr-4">
+                  <Trophy className="w-4 h-4" /> LEADERBOARD
+                </Link>
+                <button 
+                  onClick={login}
+                  className="gaming-btn px-6 py-2 border-2 border-[#FF5500] text-[#FF5500] text-sm hover:text-black hover:bg-[#FF5500] shadow-[0_0_15px_rgba(255,85,0,0.2)]"
+                >
+                  PLAY NOW
+                </button>
+              </>
             )}
           </div>
         </div>

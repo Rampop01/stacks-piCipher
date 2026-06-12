@@ -67,7 +67,7 @@ export default function GamePlay() {
 
       const profileJSON = cvToJSON(result);
 
-      if (profileJSON.success && profileJSON.value !== null) {
+      if (profileJSON.value !== undefined && profileJSON.value !== null) {
         // (some (tuple (current-stage u1) (nickname "Hacker")))
         const nickname = profileJSON.value.value.nickname.value;
         const currentStage = Number(profileJSON.value.value['current-stage'].value);
