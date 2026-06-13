@@ -18,7 +18,22 @@ export default function Profile() {
     <div className="min-h-screen bg-black text-white p-6 md:p-12 font-mono">
       <div className="max-w-5xl mx-auto">
         <header className="flex justify-between items-center mb-12 border-b border-[#FF5500]/30 pb-6">
-          {/* Header content truncated for brevity */}
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#FF5500]/10 border border-[#FF5500] flex items-center justify-center shadow-[0_0_15px_rgba(255,85,0,0.3)]">
+              <User className="w-6 h-6 text-[#FF5500]" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-black text-[#FF5500] tracking-widest drop-shadow-[0_0_10px_rgba(255,85,0,0.5)] uppercase">
+                OPERATIVE_PROFILE
+              </h1>
+              <p className="text-neutral-500 text-sm">
+                ID: {authenticated ? (userData?.profile?.stxAddress?.mainnet?.slice(0, 12) + "...") : "UNAUTHORIZED"}
+              </p>
+            </div>
+          </div>
+          <Link href="/" className="px-6 py-2 border border-[#FF5500]/50 text-[#FF5500] hover:bg-[#FF5500]/10 transition-colors">
+            [ RETURN_HOME ]
+          </Link>
         </header>
 
         {authenticated ? (
@@ -39,6 +54,21 @@ export default function Profile() {
                   <Coins className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
                   <span className="text-xs text-neutral-400 mb-1">TOTAL BOUNTY</span>
                   <span className="font-bold tracking-wider text-[#FF5500] drop-shadow-[0_0_8px_rgba(255,85,0,0.5)]">{mockStats.totalBounty}</span>
+                </div>
+                <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
+                  <Zap className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
+                  <span className="text-xs text-neutral-400 mb-1">PERFECT CLEARS</span>
+                  <span className="font-bold tracking-wider text-xl text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">{mockStats.perfectClears}</span>
+                </div>
+                <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
+                  <History className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
+                  <span className="text-xs text-neutral-400 mb-1">ACCURACY</span>
+                  <span className="font-bold tracking-wider text-xl">{mockStats.accuracy}</span>
+                </div>
+                <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
+                  <User className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
+                  <span className="text-xs text-neutral-400 mb-1">OPERATIVE LEVEL</span>
+                  <span className="font-bold tracking-wider text-xl">{mockStats.level}</span>
                 </div>
               </div>
             </div>
