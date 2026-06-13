@@ -10,7 +10,12 @@ export default function Profile() {
   const authenticated = !!userData;
 
   const mockStats = { rank: "NEON_VIPER", level: 42, totalBounty: "8,450 STX", stagesCleared: 124, perfectClears: 32, accuracy: "94.2%" };
-  const recentActivity = [{ type: "STAGE_CLEARED", stage: 124, reward: "50 STX", time: "2h ago" }, { type: "PERFECT_CLEAR", stage: 122, reward: "100 STX", time: "1d ago" }];
+  const recentActivity = [
+    { type: "STAGE_CLEARED", stage: 124, reward: "50 STX", time: "2h ago" },
+    { type: "STAGE_CLEARED", stage: 123, reward: "45 STX", time: "5h ago" },
+    { type: "PERFECT_CLEAR", stage: 122, reward: "100 STX", time: "1d ago" },
+    { type: "BOUNTY_CLAIMED", amount: "500 STX", time: "2d ago" },
+  ];
 
   useEffect(() => { if (userSession.isUserSignedIn()) { setUserData(userSession.loadUserData()); } }, []);
 
@@ -90,8 +95,30 @@ export default function Profile() {
                 </div>
               </div>
             </div>
+
             <div className="border-l border-[#FF5500]/20 pl-8">
-              {/* Sidebar / Activity Log */}
+              <h3 className="text-lg font-bold mb-6 text-white tracking-widest border-b border-[#FF5500]/20 pb-4">
+                SYSTEM_LOGS
+              </h3>
+              <div className="space-y-6 relative before:absolute before:inset-0 before:ml-[5px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#FF5500]/50 before:to-transparent">
+                {recentActivity.map((log, i) => (
+                  <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div className="flex items-center justify-center w-3 h-3 rounded-full border border-[#FF5500] bg-black text-slate-500 shadow shrink-0 z-10" />
+                    <div className="w-[calc(100%-2rem)] md:w-[calc(50%-2rem)] p-4 border border-[#FF5500]/20 bg-[#FF5500]/5 group-hover:border-[#FF5500]/50 transition-colors ml-4 md:ml-0">
+                      <div className="flex justify-between items-start mb-1">
+                        <span className="font-bold text-sm text-[#FF5500]">{log.type}</span>
+                        <span className="text-[10px] text-neutral-500">{log.time}</span>
+                      </div>
+                      <p className="text-xs text-neutral-300">
+                        {log.stage ? `Cleared Stage ${log.stage}` : "Withdrawal processed"}
+                      </p>
+                      <p className="text-xs font-bold mt-2 text-yellow-500">
+                        + {log.reward || log.amount}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ) : (
