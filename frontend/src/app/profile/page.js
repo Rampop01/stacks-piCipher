@@ -18,6 +18,13 @@ export default function Profile() {
     accuracy: "94.2%"
   };
 
+  const recentActivity = [
+    { type: "STAGE_CLEARED", stage: 124, reward: "50 STX", time: "2h ago" },
+    { type: "STAGE_CLEARED", stage: 123, reward: "45 STX", time: "5h ago" },
+    { type: "PERFECT_CLEAR", stage: 122, reward: "100 STX", time: "1d ago" },
+    { type: "BOUNTY_CLAIMED", amount: "500 STX", time: "2d ago" },
+  ];
+
   useEffect(() => {
     if (userSession.isUserSignedIn()) {
       setUserData(userSession.loadUserData());
