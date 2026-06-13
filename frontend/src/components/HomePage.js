@@ -4,7 +4,7 @@ import { useConnect } from "@stacks/connect-react";
 import { userSession } from "./Providers";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Mic, BrainCircuit, Coins, Trophy, Image as ImageIcon, Zap } from "lucide-react";
+import { Mic, BrainCircuit, Coins, Trophy, Image as ImageIcon, Zap, User } from "lucide-react";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -76,6 +76,9 @@ export default function HomePage() {
                 <span className="hidden md:inline-block px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-mono text-[#FF5500]">
                   {userData?.profile?.stxAddress?.mainnet?.slice(0,6) + '...'}
                 </span>
+                <Link href="/profile" className="hidden md:flex items-center gap-2 text-xs font-mono text-white/70 hover:text-[#FF5500] transition-colors">
+                  <User className="w-4 h-4" /> [PROFILE]
+                </Link>
                 <Link href="/leaderboard" className="hidden md:flex items-center gap-2 text-xs font-mono text-white/70 hover:text-[#FF5500] transition-colors">
                   <Trophy className="w-4 h-4" /> [RANKINGS]
                 </Link>
