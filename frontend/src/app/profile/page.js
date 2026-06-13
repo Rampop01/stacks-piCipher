@@ -9,6 +9,15 @@ export default function Profile() {
   const [userData, setUserData] = useState(null);
   const authenticated = !!userData;
 
+  const mockStats = {
+    rank: "NEON_VIPER",
+    level: 42,
+    totalBounty: "8,450 STX",
+    stagesCleared: 124,
+    perfectClears: 32,
+    accuracy: "94.2%"
+  };
+
   useEffect(() => {
     if (userSession.isUserSignedIn()) {
       setUserData(userSession.loadUserData());
