@@ -2,7 +2,7 @@
 import { User, Shield, Zap, Hexagon, History, Coins } from "lucide-react";
 import Link from "next/link";
 import { useConnect } from "@stacks/connect-react";
-import { userSession } from "../../../components/Providers";
+import { userSession } from "../../components/Providers";
 import { useState, useEffect } from "react";
 
 export default function Profile() {
