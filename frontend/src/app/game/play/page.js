@@ -7,6 +7,7 @@ import { GAME_VAULT } from "../../../data/vault";
 import { useConnect } from "@stacks/connect-react";
 import { userSession } from "../../../components/Providers";
 import { useSoundEffects } from "../../../hooks/useSoundEffects";
+import VictoryScreen from "../../../components/VictoryScreen";
 import { STACKS_MAINNET, STACKS_MOCKNET } from "@stacks/network";
 import {
   fetchCallReadOnlyFunction,
@@ -332,15 +333,7 @@ export default function GamePlay() {
   }
 
   if (currentStageData?.isComplete) {
-    return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
-        <Trophy className="w-24 h-24 text-yellow-500 mb-8 animate-bounce" />
-        <h1 className="text-5xl font-black text-yellow-500 mb-4">CAMPAIGN COMPLETE</h1>
-        <p className="text-xl text-neutral-400 font-mono text-center">
-          You have successfully hacked all stages on the Stacks network. <br/> Your NFT Badges prove your dominance.
-        </p>
-      </div>
-    );
+    return <VictoryScreen profile={profile} networkName="Stacks" />;
   }
 
   return (
