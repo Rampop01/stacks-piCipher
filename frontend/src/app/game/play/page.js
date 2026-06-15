@@ -431,7 +431,10 @@ export default function GamePlay() {
                <input 
                   type="text" 
                   value={transcript}
-                  onChange={(e) => setTranscript(e.target.value.toUpperCase())}
+                  onChange={(e) => {
+                    playKeystroke();
+                    setTranscript(e.target.value.toUpperCase());
+                  }}
                   placeholder="... AWAITING VOCAL INPUT ..." 
                   className="w-full max-w-sm bg-transparent border-b-2 border-neutral-700 focus:border-[#FF5500] outline-none py-2 text-center text-xl font-mono text-white placeholder:text-neutral-700"
                 />
