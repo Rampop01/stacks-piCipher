@@ -8,6 +8,7 @@ import { useConnect } from "@stacks/connect-react";
 import { userSession } from "../../../components/Providers";
 import { useSoundEffects } from "../../../hooks/useSoundEffects";
 import VictoryScreen from "../../../components/VictoryScreen";
+import OnboardingOverlay from "../../../components/OnboardingOverlay";
 import { STACKS_MAINNET, STACKS_MOCKNET } from "@stacks/network";
 import {
   fetchCallReadOnlyFunction,
@@ -41,6 +42,7 @@ export default function GamePlay() {
   const [transcript, setTranscript] = useState("");
   const [feedback, setFeedback] = useState({ type: "", message: "" });
   const [revealedImages, setRevealedImages] = useState([false, false, false, false]);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   // Refs
   const recognitionRef = useRef(null);
@@ -51,7 +53,19 @@ export default function GamePlay() {
     } else {
       router.push("/");
     }
+
+    if (typeof window !== "undefined") {
+      const hasSeenOnboarding = localStorage.getItem("hasSeenOnboarding");
+      if (!hasSeenOnboarding) {
+        setShowOnboarding(true);
+      }
+    }
   }, []);
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem("hasSeenOnboarding", "true");
+    setShowOnboarding(false);
+  };
 
   const loadProfile = async () => {
     try {
@@ -338,6 +352,7 @@ export default function GamePlay() {
 
   return (
     <div className="min-h-screen bg-black text-white pb-24">
+      {showOnboarding && <OnboardingOverlay onComplete={handleOnboardingComplete} networkName="Stacks" />}
       {/* Top HUD */}
       <div className="w-full border-b border-[#FF5500]/30 bg-black/80 backdrop-blur sticky top-0 z-50 p-4 flex justify-between items-center font-mono">
         <div className="flex items-center gap-4">
