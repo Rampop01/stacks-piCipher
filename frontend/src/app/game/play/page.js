@@ -6,6 +6,7 @@ import { Mic, MicOff, AlertCircle, Play, FastForward, CheckCircle2, Lock, Trophy
 import { GAME_VAULT } from "../../../data/vault";
 import { useConnect } from "@stacks/connect-react";
 import { userSession } from "../../../components/Providers";
+import { useSoundEffects } from "../../../hooks/useSoundEffects";
 import { STACKS_MAINNET, STACKS_MOCKNET } from "@stacks/network";
 import {
   fetchCallReadOnlyFunction,
@@ -26,6 +27,7 @@ const NETWORK = STACKS_MAINNET;
 export default function GamePlay() {
   const router = useRouter();
   const { doContractCall } = useConnect();
+  const { playBlip, playKeystroke, playSuccess, playError, playUnlock } = useSoundEffects();
 
   // State
   const [profile, setProfile] = useState(null);
@@ -117,6 +119,7 @@ export default function GamePlay() {
 
   const revealImage = (index) => {
     if (revealedImages[index]) return;
+    playBlip();
     const newRevealed = [...revealedImages];
     newRevealed[index] = true;
     setRevealedImages(newRevealed);
@@ -136,12 +139,14 @@ export default function GamePlay() {
       postConditionMode: PostConditionMode.Deny,
       postConditions: [],
       onFinish: (data) => {
+        playSuccess();
         setFeedback({ type: "success", message: "Identity registered! Waiting for block confirmation..." });
         speakText(`Identity confirmed. Welcome, ${nicknameInput}.`);
         // We wait a bit then load profile (though Stacks blocks take 10 mins, we assume fast mocknet or optimistically update)
         setTimeout(() => loadProfile(), 3000);
       },
       onCancel: () => {
+        playError();
         setIsRegistering(false);
         setFeedback({ type: "error", message: "Registration cancelled." });
       }
@@ -193,6 +198,7 @@ export default function GamePlay() {
   const checkAnswer = async (guess) => {
     if (!currentStageData) return;
     if (guess === currentStageData.word) {
+      playSuccess();
       speakText("Access granted. Impressive hacking.");
       setFeedback({ type: "success", message: "Correct! Submitting to Stacks blockchain..." });
       
@@ -205,14 +211,17 @@ export default function GamePlay() {
         postConditionMode: PostConditionMode.Deny,
         postConditions: [],
         onFinish: (data) => {
+          playUnlock();
           setFeedback({ type: "success", message: "Answer submitted successfully!" });
           setTimeout(() => loadProfile(), 2000);
         },
         onCancel: () => {
+          playError();
           setFeedback({ type: "error", message: "Submission cancelled." });
         }
       });
     } else {
+      playError();
       speakText("Incorrect. Security systems alerted.");
       setFeedback({ type: "error", message: `Incorrect guess: ${guess}` });
     }
@@ -236,11 +245,13 @@ export default function GamePlay() {
       postConditionMode: PostConditionMode.Deny,
       postConditions: [postCondition],
       onFinish: (data) => {
+        playSuccess();
         speakText("Stage bypassed using STX.");
         setFeedback({ type: "success", message: "Stage bypassed! Waiting for block..." });
         setTimeout(() => loadProfile(), 3000);
       },
       onCancel: () => {
+        playError();
         setFeedback({ type: "error", message: "Bypass cancelled." });
       }
     });
@@ -264,11 +275,13 @@ export default function GamePlay() {
       postConditionMode: PostConditionMode.Deny,
       postConditions: [postCondition],
       onFinish: (data) => {
+        playUnlock();
         setShowHint(true);
         speakText("Hint unlocked.");
         setFeedback({ type: "success", message: "Hint purchased!" });
       },
       onCancel: () => {
+        playError();
         setFeedback({ type: "error", message: "Hint purchase cancelled." });
       }
     });
@@ -293,7 +306,10 @@ export default function GamePlay() {
           <input 
             type="text" 
             value={nicknameInput}
-            onChange={(e) => setNicknameInput(e.target.value)}
+            onChange={(e) => {
+              playKeystroke();
+              setNicknameInput(e.target.value);
+            }}
             placeholder="NICKNAME" 
             className="w-full bg-transparent border-b-2 border-[#FF5500]/50 focus:border-[#FF5500] outline-none py-3 text-xl font-mono text-[#FF5500] placeholder:text-[#FF5500]/30 mb-8"
           />
