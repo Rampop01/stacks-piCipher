@@ -214,3 +214,4 @@ export default function Profile() {
 // 2. state initialization
 // 3. session load
 // 4. data fetch
+// 5. fallback handler
