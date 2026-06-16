@@ -220,3 +220,4 @@ export default function Profile() {
 // 8. clears calc
 // 9. accuracy calc
 // 10. log generator
+// 11. badges generator
