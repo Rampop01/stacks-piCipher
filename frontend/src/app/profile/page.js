@@ -215,3 +215,4 @@ export default function Profile() {
 // 3. session load
 // 4. data fetch
 // 5. fallback handler
+// 6. level calc
