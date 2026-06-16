@@ -216,3 +216,4 @@ export default function Profile() {
 // 4. data fetch
 // 5. fallback handler
 // 6. level calc
+// 7. bounty calc
