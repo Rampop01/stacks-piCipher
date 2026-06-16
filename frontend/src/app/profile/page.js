@@ -217,3 +217,4 @@ export default function Profile() {
 // 5. fallback handler
 // 6. level calc
 // 7. bounty calc
+// 8. clears calc
