@@ -211,3 +211,4 @@ export default function Profile() {
   );
 }
 // 1. constants setup
+// 2. state initialization
