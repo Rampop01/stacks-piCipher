@@ -219,3 +219,4 @@ export default function Profile() {
 // 7. bounty calc
 // 8. clears calc
 // 9. accuracy calc
+// 10. log generator
