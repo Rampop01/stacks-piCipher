@@ -20,6 +20,8 @@ import {
   Pc,
   FungibleConditionCode
 } from "@stacks/transactions";
+import Link from "next/link";
+import TiltCard from "../../../components/TiltCard";
 
 
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "SP1BTBG1TW13NEV2FQM7HC1BZ9XZV7FZSGPMVV38M";
@@ -355,14 +357,28 @@ export default function GamePlay() {
     <div className="min-h-screen bg-black text-white pb-24">
       {showOnboarding && <OnboardingOverlay onComplete={handleOnboardingComplete} networkName="Stacks" />}
       {/* Top HUD */}
-      <div className="w-full border-b border-[#FF5500]/30 bg-black/80 backdrop-blur sticky top-0 z-50 p-4 flex justify-between items-center font-mono">
-        <div className="flex items-center gap-4">
-          <span className="text-[#FF5500] font-bold tracking-widest uppercase">
-            {profile?.nickname || "UNKNOWN"}
-          </span>
+      <div className="w-full border-b border-[#FF5500]/30 bg-black/60 backdrop-blur-md sticky top-0 z-50 p-4 flex justify-between items-center font-mono shadow-[0_4px_20px_rgba(255,85,0,0.1)]">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="text-white/60 hover:text-[#FF5500] transition-colors flex items-center gap-2 text-sm">
+             <span className="hidden md:inline">HOME</span>
+          </Link>
+          <div className="flex items-center gap-4 border-l border-white/10 pl-6">
+            <span className="text-[#FF5500] font-bold tracking-widest uppercase">
+              {profile?.nickname || "UNKNOWN"}
+            </span>
+          </div>
         </div>
-        <div className="text-xl font-black text-white drop-shadow-[0_0_5px_#FF5500]">
-          STAGE {profile?.currentStage}
+        
+        <div className="flex items-center gap-6">
+          <Link href="/leaderboard" className="text-white/60 hover:text-[#FF5500] transition-colors flex items-center gap-2 text-sm">
+             <Trophy className="w-4 h-4" /> <span className="hidden md:inline">RANKS</span>
+          </Link>
+          <Link href="/profile" className="text-white/60 hover:text-[#FF5500] transition-colors flex items-center gap-2 text-sm">
+             <span className="hidden md:inline">PROFILE</span>
+          </Link>
+          <div className="text-right border-l border-white/10 pl-6">
+            <div className="text-xs text-neutral-500">STAGE {profile?.currentStage}</div>
+          </div>
         </div>
       </div>
 
@@ -373,24 +389,26 @@ export default function GamePlay() {
           {[0, 1, 2, 3].map((index) => {
              const filters = ["", "hue-rotate-90 saturate-200", "invert sepia", "grayscale contrast-200"];
              return (
-               <div key={index} 
-                    className="border-2 border-[#FF5500]/50 relative group overflow-hidden bg-black/50 flex items-center justify-center cursor-pointer shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors"
-                    onClick={() => revealImage(index)}>
-                  {revealedImages[index] ? (
-                    <img 
-                      src={currentStageData?.imageUrl} 
-                      alt={`Cipher Anomaly ${index+1}`} 
-                      className={`w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 ${filters[index]}`}
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center justify-center text-[#FF5500]/50 group-hover:text-[#FF5500] transition-colors">
-                      <Lock className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
-                      <span className="font-mono text-xs tracking-widest text-center">REVEAL<br/>ANOMALY_0{index+1}</span>
-                    </div>
-                  )}
-                  {/* Scanline Overlay */}
-                  <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-30 mix-blend-overlay"></div>
-               </div>
+               <TiltCard key={index} className="w-full h-full">
+                 <div 
+                      className="border border-[#FF5500]/30 relative group overflow-hidden backdrop-blur-md bg-black/40 flex items-center justify-center cursor-pointer shadow-[0_0_20px_rgba(255,85,0,0.1)] hover:shadow-[0_0_30px_rgba(255,85,0,0.3)] hover:border-[#FF5500] transition-all duration-300 w-full h-full"
+                      onClick={() => revealImage(index)}>
+                    {revealedImages[index] ? (
+                      <img 
+                        src={currentStageData?.imageUrl} 
+                        alt={`Cipher Anomaly ${index+1}`} 
+                        className={`w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 ${filters[index]}`}
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center justify-center text-[#FF5500]/40 group-hover:text-[#FF5500] transition-colors">
+                        <Lock className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
+                        <span className="font-mono text-xs tracking-widest text-center transition-transform group-hover:animate-glitch-skew">DATA<br/>ENCRYPTED</span>
+                      </div>
+                    )}
+                    {/* Scanline Overlay */}
+                    <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-40 mix-blend-overlay"></div>
+                 </div>
+               </TiltCard>
              )
           })}
         </div>
@@ -399,13 +417,13 @@ export default function GamePlay() {
         <div className="grid grid-cols-2 gap-4 mb-8">
           <button 
             onClick={handleBuyHint}
-            className="flex items-center justify-center gap-2 p-3 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 font-mono text-xs md:text-sm transition-all"
+            className="flex items-center justify-center gap-2 px-3 py-4 neo-btn text-yellow-500 font-mono text-xs md:text-sm"
           >
             <AlertCircle className="w-4 h-4" /> 0.01 STX HINT
           </button>
           <button 
             onClick={handleBypass}
-            className="flex items-center justify-center gap-2 p-3 border border-red-500/50 text-red-500 hover:bg-red-500/10 font-mono text-xs md:text-sm transition-all"
+            className="flex items-center justify-center gap-2 px-3 py-4 neo-btn text-red-500 font-mono text-xs md:text-sm"
           >
             <FastForward className="w-4 h-4" /> 0.05 STX BYPASS
           </button>
@@ -419,35 +437,37 @@ export default function GamePlay() {
         )}
 
         {/* Input Area */}
-        <div className="w-full p-6 border border-[#FF5500]/30 bg-black/50 relative">
-          <div className="absolute -top-3 left-4 bg-black px-2 text-xs text-[#FF5500] font-mono">
-            VOICE_OVERRIDE.exe
+        <div className="w-full p-6 border border-[#FF5500]/40 backdrop-blur-lg bg-black/60 relative shadow-[0_0_30px_rgba(255,85,0,0.1)]">
+          <div className="absolute -top-3 left-4 bg-black px-2 text-xs text-[#FF5500] font-mono border border-[#FF5500]/50">
+            TERMINAL_INPUT.exe
           </div>
           
           <div className="flex flex-col items-center">
             <button
               onClick={toggleListening}
-              className={`w-24 h-24 rounded-full flex items-center justify-center mb-6 transition-all duration-300 ${
+              className={`w-20 h-20 rounded-full flex items-center justify-center mb-8 transition-all duration-300 ${
                 isListening 
                   ? "bg-red-500/20 border-2 border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.5)] animate-pulse" 
-                  : "bg-[#FF5500]/10 border-2 border-[#FF5500]/50 hover:border-[#FF5500] hover:shadow-[0_0_20px_rgba(255,85,0,0.3)]"
+                  : "bg-[#FF5500]/10 border border-[#FF5500]/50 hover:border-[#FF5500] hover:shadow-[0_0_20px_rgba(255,85,0,0.4)]"
               }`}
             >
-              {isListening ? <Mic className="w-10 h-10 text-red-500" /> : <MicOff className="w-10 h-10 text-[#FF5500]" />}
+              {isListening ? <Mic className="w-8 h-8 text-red-500" /> : <MicOff className="w-8 h-8 text-[#FF5500]" />}
             </button>
 
-            <div className="w-full flex justify-center gap-2 mb-4">
-               <input 
-                  type="text" 
-                  value={transcript}
-                  onChange={(e) => {
-                    const val = e.target.value.toUpperCase().slice(0, 50);
-                    playKeystroke();
-                    setTranscript(val);
-                  }}
-                  placeholder="... AWAITING VOCAL INPUT ..." 
-                  className="w-full max-w-sm bg-transparent border-b-2 border-neutral-700 focus:border-[#FF5500] outline-none py-2 text-center text-xl font-mono text-white placeholder:text-neutral-700"
-                />
+            <div className="w-full flex justify-center mb-6">
+                 <div className="flex items-center text-[#FF5500] font-mono text-2xl w-full max-w-sm border-b border-[#FF5500]/50 focus-within:border-[#FF5500] focus-within:shadow-[0_4px_15px_-3px_rgba(255,85,0,0.3)] pb-2 transition-all">
+                   <input 
+                      type="text" 
+                      value={transcript}
+                      onChange={(e) => {
+                        const val = e.target.value.toUpperCase().slice(0, 50);
+                        playKeystroke();
+                        setTranscript(val);
+                      }}
+                      placeholder="_" 
+                      className="w-full bg-transparent outline-none text-[#FF5500] placeholder:text-[#FF5500]/30"
+                    />
+                 </div>
             </div>
 
             {transcript && !isListening && (

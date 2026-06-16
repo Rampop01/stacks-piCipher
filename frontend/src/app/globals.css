@@ -1,25 +1,61 @@
 @import "tailwindcss";
 
 @theme {
-  --color-celo-green: #FF5500;
+  --color-celo-green: #35D07F;
   --color-celo-dark: #1e9a58;
 }
 
 @layer base {
   body {
-    @apply bg-neutral-950 text-neutral-50;
+    @apply bg-transparent text-neutral-50;
     font-family: var(--font-orbitron), sans-serif;
-    background-image: 
-      radial-gradient(circle at 15% 50%, rgba(255, 85, 0, 0.05), transparent 25%),
-      radial-gradient(circle at 85% 30%, rgba(255, 85, 0, 0.08), transparent 25%);
-    background-attachment: fixed;
   }
 }
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+  40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); }
+  100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -1px); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -1px); }
+  20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, 1px); }
+  40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, -2px); }
+  60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 2px); }
+  80% { clip-path: inset(50% 0 30% 0); transform: translate(1px, -1px); }
+  100% { clip-path: inset(5% 0 80% 0); transform: translate(-1px, 1px); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-5deg); }
+  40% { transform: skew(5deg); }
+  60% { transform: skew(-2deg); }
+  80% { transform: skew(2deg); }
+  100% { transform: skew(0deg); }
+}
+
+.animate-glitch-1 {
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+
+.animate-glitch-2 {
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.animate-glitch-skew {
+  animation: glitch-skew 5s infinite linear alternate-reverse;
+}
+
 
 .gaming-btn {
   @apply relative transition-all duration-300 transform font-bold uppercase tracking-wider;
   font-family: var(--font-orbitron), sans-serif;
-  box-shadow: 0 0 10px rgba(255, 85, 0, 0.2), inset 0 0 10px rgba(255, 85, 0, 0.1);
+  box-shadow: 0 0 10px rgba(53, 208, 127, 0.2), inset 0 0 10px rgba(53, 208, 127, 0.1);
   clip-path: polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px);
 }
 
@@ -27,7 +63,7 @@
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--btn-color, #FF5500);
+  background: var(--btn-color, #35D07F);
   z-index: -1;
   clip-path: polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px);
   transform: scaleX(0);
@@ -45,7 +81,7 @@
 
 .gaming-btn:hover {
   @apply scale-105;
-  box-shadow: 0 0 20px rgba(255, 85, 0, 0.5), inset 0 0 15px rgba(255, 85, 0, 0.2);
+  box-shadow: 0 0 20px rgba(53, 208, 127, 0.5), inset 0 0 15px rgba(53, 208, 127, 0.2);
 }
 
 .gaming-btn:active {
@@ -53,5 +89,35 @@
 }
 
 .neon-border {
-  @apply border border-[#FF5500]/40 shadow-[0_0_15px_rgba(255,85,0,0.15)];
+  @apply border border-[#35D07F]/40 shadow-[0_0_15px_rgba(53,208,127,0.15)];
+}
+
+.neo-btn {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    5px 5px 10px rgba(0, 0, 0, 0.8), 
+    -2px -2px 8px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(53, 208, 127, 0.2);
+  border-radius: 8px;
+  color: #35D07F;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.neo-btn:hover {
+  box-shadow: 
+    8px 8px 15px rgba(0, 0, 0, 0.9), 
+    -3px -3px 10px rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  border-color: rgba(53, 208, 127, 0.5);
+}
+
+.neo-btn:active {
+  box-shadow: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.8), 
+    inset -2px -2px 8px rgba(255, 255, 255, 0.05);
+  transform: translateY(2px);
 }
