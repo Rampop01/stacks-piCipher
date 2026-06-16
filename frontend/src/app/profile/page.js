@@ -218,3 +218,4 @@ export default function Profile() {
 // 6. level calc
 // 7. bounty calc
 // 8. clears calc
+// 9. accuracy calc
