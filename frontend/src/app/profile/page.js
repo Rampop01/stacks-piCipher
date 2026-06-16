@@ -210,3 +210,4 @@ export default function Profile() {
     </div>
   );
 }
+// 1. constants setup
