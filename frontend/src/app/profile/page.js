@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { fetchCallReadOnlyFunction, cvToJSON, standardPrincipalCV } from "@stacks/transactions";
 import { STACKS_MAINNET } from "@stacks/network";
 
-const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "SP1BTBG1TW13NEV2FQM7HC1BZ9XZV7FZSGPMVV38M";
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "SP1DQM5RKBBT5XTF7EDRHZ4NFP01R2FG7MV2FQC33";
 const CONTRACT_NAME = "piccipher-game-v2";
 const NETWORK = STACKS_MAINNET;
 
