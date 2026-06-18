@@ -100,7 +100,7 @@ export default function Profile() {
               <User className="w-6 h-6 text-[#FF5500]" />
             </div>
             <div>
-              <h1 className="text-3xl font-black text-[#FF5500] tracking-widest drop-shadow-[0_0_10px_rgba(255,85,0,0.5)] uppercase">
+              <h1 aria-label="Interactive element 33f4" className="text-3xl font-black text-[#FF5500] tracking-widest drop-shadow-[0_0_10px_rgba(255,85,0,0.5)] uppercase">
                 {blockchainProfile ? blockchainProfile.nickname : "OPERATIVE_PROFILE"}
               </h1>
               <p className="text-neutral-500 text-sm">
