@@ -113,7 +113,7 @@ export default function HomePage() {
           <section className="min-h-screen pt-32 pb-24 px-6 flex flex-col items-center justify-center">
             <div className="w-full max-w-6xl animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div className="text-center mb-16">
-                <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] to-[#1e9a58] mb-6 drop-shadow-[0_0_15px_rgba(255,85,0,0.3)]">
+                <h2 data-testid="text-aacf30" className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] to-[#1e9a58] mb-6 drop-shadow-[0_0_15px_rgba(255,85,0,0.3)]">
                   ENTER THE GRID
                 </h2>
                 <p className="text-xl text-neutral-400 max-w-2xl mx-auto font-mono">
