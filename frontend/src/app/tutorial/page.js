@@ -46,7 +46,7 @@ export default function TutorialPage() {
           </div>
 
           {/* Revealing */}
-          <div className="border border-[#FF5500]/30 bg-black/50 p-6 shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors">
+          <div data-theme-role="primary-surface" className="border border-[#FF5500]/30 bg-black/50 p-6 shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors">
             <LockOpen className="w-8 h-8 text-[#FF5500] mb-4" />
             <h2 className="text-xl font-bold text-[#FF5500] mb-2">2. REVEAL MECHANICS</h2>
             <p className="text-neutral-300 text-sm leading-relaxed">
