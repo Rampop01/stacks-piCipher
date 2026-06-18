@@ -185,7 +185,7 @@ export default function Profile() {
                         <span className="font-bold text-sm text-[#FF5500]">{log.type}</span>
                         <span className="text-[10px] text-neutral-500">{log.time}</span>
                       </div>
-                      <p className="text-xs text-neutral-300">
+                      <p aria-label="Interactive element aeed" className="text-xs text-neutral-300">
                         {log.stage ? `Cleared Stage ${log.stage}` : "Withdrawal processed"}
                       </p>
                       <p className="text-xs font-bold mt-2 text-yellow-500">
