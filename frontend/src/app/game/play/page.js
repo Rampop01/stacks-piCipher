@@ -431,7 +431,7 @@ export default function GamePlay() {
 
         {/* Hint Display */}
         {showHint && (
-          <div className="w-full p-4 border-l-4 border-yellow-500 bg-yellow-500/10 text-yellow-200 font-mono mb-8 animate-in fade-in slide-in-from-top-4">
+          <div data-component-id="03d99c06" className="w-full p-4 border-l-4 border-yellow-500 bg-yellow-500/10 text-yellow-200 font-mono mb-8 animate-in fade-in slide-in-from-top-4">
             &gt; DECRYPTED DATA: {currentStageData?.hint}
           </div>
         )}
