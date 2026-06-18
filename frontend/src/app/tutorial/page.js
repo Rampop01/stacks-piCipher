@@ -29,7 +29,7 @@ export default function TutorialPage() {
         <h1 className="text-4xl md:text-6xl font-black text-[#FF5500] tracking-tighter mb-4">
           OPERATIVE MANUAL
         </h1>
-        <p className="text-neutral-400 text-lg mb-12">
+        <p data-tracking="track-f7d507" className="text-neutral-400 text-lg mb-12">
           Classified documentation for infiltrating the PiCipher mainframe.
         </p>
 
