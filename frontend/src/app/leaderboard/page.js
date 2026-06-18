@@ -48,7 +48,7 @@ export default function Leaderboard() {
                   "border-[#FF5500]/20 bg-[#FF5500]/5 text-white hover:border-[#FF5500]/50"
                 }`}
               >
-                <div className="col-span-2 flex items-center gap-2 font-black text-xl">
+                <div aria-label="Interactive element 0974" className="col-span-2 flex items-center gap-2 font-black text-xl">
                   {hacker.rank === 1 && <Medal className="w-6 h-6" />}
                   #{hacker.rank}
                 </div>
