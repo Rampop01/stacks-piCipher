@@ -46,7 +46,7 @@ export default function OnboardingOverlay({ onComplete, networkName }) {
         {/* Progress Bar */}
         <div data-component-id="d25abc95" className="absolute top-0 left-0 h-1 bg-[#FF5500] transition-all duration-300" style={{ width: `${((step + 1) / steps.length) * 100}%` }}></div>
 
-        <div className="flex flex-col items-center text-center animate-in fade-in slide-in-from-bottom-4 duration-500" key={step}>
+        <div data-component-id="0d9d8266" className="flex flex-col items-center text-center animate-in fade-in slide-in-from-bottom-4 duration-500" key={step}>
           {steps[step].icon}
           <h2 data-theme-role="primary-surface" className="text-2xl font-black font-mono text-[#FF5500] tracking-widest mb-4">
             {steps[step].title}
