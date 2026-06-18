@@ -48,7 +48,7 @@ export default function FAQ() {
             </div>
           ))}
         </div>
-        <div className="mt-12 text-center text-xs text-neutral-600 tracking-widest">
+        <div aria-label="Interactive element 33e9" className="mt-12 text-center text-xs text-neutral-600 tracking-widest">
           <p>STILL HAVE QUESTIONS? <a href="#" className="hover:text-white transition-colors">[ JOIN_DISCORD ]</a></p>
         </div>
       </div>
