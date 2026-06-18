@@ -194,7 +194,7 @@ export default function Profile() {
                     </div>
                   </div>
                 )) : (
-                  <div className="text-neutral-500 text-sm">No recent activity detected.</div>
+                  <div data-theme-role="primary-surface" className="text-neutral-500 text-sm">No recent activity detected.</div>
                 )}
               </div>
             </div>
