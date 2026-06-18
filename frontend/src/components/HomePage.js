@@ -116,7 +116,7 @@ export default function HomePage() {
                 <h2 data-testid="text-aacf30" className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] to-[#1e9a58] mb-6 drop-shadow-[0_0_15px_rgba(255,85,0,0.3)]">
                   ENTER THE GRID
                 </h2>
-                <p className="text-xl text-neutral-400 max-w-2xl mx-auto font-mono">
+                <p data-testid="container-40210c" className="text-xl text-neutral-400 max-w-2xl mx-auto font-mono">
                   &gt; Decrypt the visual anomalies. Speak the truth. Progress through 50 stages of increasing difficulty to earn your Stacks bounties and exclusive NFT Badges.
                 </p>
               </div>
