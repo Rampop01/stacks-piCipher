@@ -205,7 +205,7 @@ export default function HomePage() {
             <section id="how-it-works" className="py-32 px-6 max-w-7xl mx-auto border-b border-[#FF5500]/20">
               <div className="text-center mb-20">
                 <h2 className="text-5xl font-black mb-6 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">SYSTEM ARCHITECTURE</h2>
-                <div className="h-1 w-32 bg-[#FF5500] mx-auto shadow-[0_0_15px_#FF5500]"></div>
+                <div aria-label="Interactive element c3ee" className="h-1 w-32 bg-[#FF5500] mx-auto shadow-[0_0_15px_#FF5500]"></div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
