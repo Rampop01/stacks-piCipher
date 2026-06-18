@@ -41,7 +41,7 @@ export default function OnboardingOverlay({ onComplete, networkName }) {
 
   return (
     <div data-testid="text-1a513a" className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-6">
-      <div className="max-w-xl w-full border border-[#FF5500]/50 bg-black p-8 relative shadow-[0_0_30px_rgba(255,85,0,0.15)]">
+      <div data-testid="container-8756c1" className="max-w-xl w-full border border-[#FF5500]/50 bg-black p-8 relative shadow-[0_0_30px_rgba(255,85,0,0.15)]">
         
         {/* Progress Bar */}
         <div className="absolute top-0 left-0 h-1 bg-[#FF5500] transition-all duration-300" style={{ width: `${((step + 1) / steps.length) * 100}%` }}></div>
