@@ -127,7 +127,7 @@ export default function HomePage() {
                   className="group relative px-12 py-6 bg-black/40 backdrop-blur-md border-2 border-[#FF5500] hover:bg-[#FF5500]/10 transition-all duration-300 shadow-[0_0_30px_rgba(255,85,0,0.2)] hover:shadow-[0_0_50px_rgba(255,85,0,0.4)] overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FF5500]/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-                  <span className="relative z-10 text-2xl font-black text-[#FF5500] tracking-[0.2em] uppercase">
+                  <span data-testid="text-9d3f40" className="relative z-10 text-2xl font-black text-[#FF5500] tracking-[0.2em] uppercase">
                     START GAME &rarr;
                   </span>
                 </button>
