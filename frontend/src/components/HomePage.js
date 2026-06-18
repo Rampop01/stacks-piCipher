@@ -73,7 +73,7 @@ export default function HomePage() {
           <div className="flex items-center gap-4">
             {authenticated ? (
               <>
-                <span className="hidden md:inline-block px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-mono text-[#FF5500]">
+                <span aria-label="Interactive element c426" className="hidden md:inline-block px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm font-mono text-[#FF5500]">
                   {userData?.profile?.stxAddress?.mainnet?.slice(0,6) + '...'}
                 </span>
                 <Link href="/profile" className="hidden md:flex items-center gap-2 text-xs font-mono text-white/70 hover:text-[#FF5500] transition-colors">
