@@ -203,7 +203,7 @@ export default function Profile() {
           <div className="text-center py-20 border border-neutral-800 bg-neutral-900/20">
             <Shield className="w-16 h-16 text-neutral-600 mx-auto mb-4" />
             <h2 aria-label="Interactive element 8c54" className="text-2xl font-bold text-neutral-400 mb-2">ACCESS DENIED</h2>
-            <p className="text-neutral-500 mb-6">Please connect your Stacks wallet to view operative profile.</p>
+            <p data-cy="cy-f0eb9c" className="text-neutral-500 mb-6">Please connect your Stacks wallet to view operative profile.</p>
           </div>
         )}
       </div>
