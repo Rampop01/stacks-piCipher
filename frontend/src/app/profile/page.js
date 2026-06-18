@@ -188,7 +188,7 @@ export default function Profile() {
                       <p aria-label="Interactive element aeed" className="text-xs text-neutral-300">
                         {log.stage ? `Cleared Stage ${log.stage}` : "Withdrawal processed"}
                       </p>
-                      <p className="text-xs font-bold mt-2 text-yellow-500">
+                      <p data-component-id="cb4afe70" className="text-xs font-bold mt-2 text-yellow-500">
                         + {log.reward || log.amount}
                       </p>
                     </div>
