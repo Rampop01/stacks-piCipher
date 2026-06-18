@@ -247,7 +247,7 @@ export default function HomePage() {
                   <span className="text-[#FF5500] text-3xl drop-shadow-[0_0_12px_#FF5500] -ml-0.5 -mr-0.5">C</span>
                   <span className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">ipher</span>
                 </div>
-                <p className="text-neutral-600 font-mono text-xs tracking-[0.3em]">© 2026 // STACKS NETWORK // V2.0</p>
+                <p data-testid="text-882798" className="text-neutral-600 font-mono text-xs tracking-[0.3em]">© 2026 // STACKS NETWORK // V2.0</p>
                 <div className="flex items-center gap-6 text-[#FF5500] font-mono text-xs tracking-widest uppercase">
                   <a href="#" className="hover:text-white transition-colors">[Twitter]</a>
                   <a href="#" className="hover:text-white transition-colors">[Discord]</a>
