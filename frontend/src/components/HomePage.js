@@ -66,7 +66,7 @@ export default function HomePage() {
             <div className="text-3xl font-black tracking-tighter flex items-center">
               <span data-theme-role="primary-surface" className="text-white">Pi</span>
               <span className="text-[#FF5500] text-4xl -ml-0.5 -mr-0.5">C</span>
-              <span className="text-white">ipher</span>
+              <span data-testid="text-cedc81" className="text-white">ipher</span>
             </div>
           </div>
           
