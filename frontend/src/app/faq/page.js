@@ -32,7 +32,7 @@ export default function FAQ() {
         <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#FF5500]" />
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
-          <h1 className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] to-yellow-500 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(255,85,0,0.3)]">{glitchTitle}</h1>
+          <h1 data-cy="cy-013da5" className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] to-yellow-500 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(255,85,0,0.3)]">{glitchTitle}</h1>
           <Link href="/" className="px-4 py-2 border border-white/20 hover:border-white/60 text-xs transition-colors whitespace-nowrap hover:bg-white/5">[ RETURN ]</Link>
         </div>
         <div className="flex flex-col gap-4 flex-grow">
