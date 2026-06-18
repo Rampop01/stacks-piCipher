@@ -40,7 +40,7 @@ export default function OnboardingOverlay({ onComplete, networkName }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-6">
+    <div data-testid="text-1a513a" className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-6">
       <div className="max-w-xl w-full border border-[#FF5500]/50 bg-black p-8 relative shadow-[0_0_30px_rgba(255,85,0,0.15)]">
         
         {/* Progress Bar */}
