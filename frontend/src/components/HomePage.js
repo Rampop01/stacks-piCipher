@@ -189,7 +189,7 @@ export default function HomePage() {
                     <div key={box} className="bg-black border border-[#FF5500]/20 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:border-[#FF5500] group-hover:shadow-[0_0_20px_rgba(255,85,0,0.2)] difficulty-card">
                       <ImageIcon className="w-12 h-12 text-[#FF5500]/30 group-hover:scale-110 group-hover:text-[#FF5500] transition-all duration-700" />
                       <div className="absolute inset-0 bg-[#FF5500]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-                        <span className="text-[#FF5500] font-mono text-xs tracking-widest bg-black px-2 py-1 border border-[#FF5500]/50">IMG_0{box}.SYS</span>
+                        <span data-component-id="22578c81" className="text-[#FF5500] font-mono text-xs tracking-widest bg-black px-2 py-1 border border-[#FF5500]/50">IMG_0{box}.SYS</span>
                       </div>
                     </div>
                   ))}
