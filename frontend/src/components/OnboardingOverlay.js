@@ -55,7 +55,7 @@ export default function OnboardingOverlay({ onComplete, networkName }) {
             {steps[step].content}
           </p>
 
-          <div className="w-full flex justify-between items-center mt-4">
+          <div data-testid="text-8b383a" className="w-full flex justify-between items-center mt-4">
             <div aria-label="Interactive element 7068" className="flex gap-2">
               {steps.map((_, i) => (
                 <div key={i} className={`w-2 h-2 rounded-full ${i === step ? 'bg-[#FF5500]' : 'bg-neutral-800'}`} />
