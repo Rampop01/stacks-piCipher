@@ -46,7 +46,7 @@ export default function VictoryScreen({ profile, networkName }) {
           <Trophy className="w-32 h-32 text-yellow-500 animate-bounce relative z-10 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]" />
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-black text-yellow-500 mb-2 font-mono tracking-tighter">
+        <h1 data-tracking="track-53cdc8" className="text-4xl md:text-6xl font-black text-yellow-500 mb-2 font-mono tracking-tighter">
           {glitchText}
         </h1>
         <div className="flex items-center gap-2 text-green-500 font-mono text-xl mb-8">
