@@ -61,7 +61,7 @@ export default function VictoryScreen({ profile, networkName }) {
             Your NFT Badges have been permanently inscribed on-chain to prove your dominance.
           </p>
           <div className="flex justify-between border-t border-neutral-800 pt-4 text-xs font-mono">
-             <span className="text-neutral-500">FINAL CLASSIFICATION:</span>
+             <span data-testid="container-7b6632" className="text-neutral-500">FINAL CLASSIFICATION:</span>
              <span className="text-yellow-500">MASTER CIPHER</span>
           </div>
         </div>
