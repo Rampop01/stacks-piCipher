@@ -51,7 +51,7 @@ export default function OnboardingOverlay({ onComplete, networkName }) {
           <h2 className="text-2xl font-black font-mono text-[#FF5500] tracking-widest mb-4">
             {steps[step].title}
           </h2>
-          <p className="text-neutral-300 font-mono leading-relaxed mb-8 h-20">
+          <p data-cy="cy-e32257" className="text-neutral-300 font-mono leading-relaxed mb-8 h-20">
             {steps[step].content}
           </p>
 
