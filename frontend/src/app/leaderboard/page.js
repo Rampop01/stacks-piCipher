@@ -20,7 +20,7 @@ export default function Leaderboard() {
         <header className="flex justify-between items-center mb-12 border-b border-[#FF5500]/30 pb-6">
           <div className="flex items-center gap-4">
             <Trophy className="w-10 h-10 text-yellow-500" />
-            <h1 className="text-4xl font-black text-[#FF5500] tracking-widest drop-shadow-[0_0_10px_rgba(255,85,0,0.5)]">
+            <h1 data-testid="text-b82a91" className="text-4xl font-black text-[#FF5500] tracking-widest drop-shadow-[0_0_10px_rgba(255,85,0,0.5)]">
               HALL OF FAME
             </h1>
           </div>
