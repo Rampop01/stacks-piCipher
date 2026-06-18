@@ -40,7 +40,7 @@ export default function VictoryScreen({ profile, networkName }) {
       <div aria-label="Interactive element 0040" className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,85,0,0.06),rgba(0,0,0,0.02))] bg-[length:100%_4px,4px_100%] opacity-20 pointer-events-none"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center max-w-2xl text-center">
+      <div data-testid="text-77f159" className="relative z-10 flex flex-col items-center max-w-2xl text-center">
         <div className="relative mb-8 group">
           <div data-testid="container-0e7325" className="absolute inset-0 bg-yellow-500 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
           <Trophy className="w-32 h-32 text-yellow-500 animate-bounce relative z-10 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]" />
