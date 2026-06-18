@@ -62,7 +62,7 @@ export default function VictoryScreen({ profile, networkName }) {
           </p>
           <div className="flex justify-between border-t border-neutral-800 pt-4 text-xs font-mono">
              <span data-testid="container-7b6632" className="text-neutral-500">FINAL CLASSIFICATION:</span>
-             <span className="text-yellow-500">MASTER CIPHER</span>
+             <span data-theme-role="primary-surface" className="text-yellow-500">MASTER CIPHER</span>
           </div>
         </div>
 
