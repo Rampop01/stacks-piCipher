@@ -60,7 +60,7 @@ export default function VictoryScreen({ profile, networkName }) {
             You have successfully bypassed all security protocols and extracted the sensitive data from the {networkName} network. 
             Your NFT Badges have been permanently inscribed on-chain to prove your dominance.
           </p>
-          <div className="flex justify-between border-t border-neutral-800 pt-4 text-xs font-mono">
+          <div data-cy="cy-45b8e1" className="flex justify-between border-t border-neutral-800 pt-4 text-xs font-mono">
              <span data-testid="container-7b6632" className="text-neutral-500">FINAL CLASSIFICATION:</span>
              <span data-theme-role="primary-surface" className="text-yellow-500">MASTER CIPHER</span>
           </div>
