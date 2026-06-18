@@ -400,7 +400,7 @@ export default function GamePlay() {
                         className={`w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 ${filters[index]}`}
                       />
                     ) : (
-                      <div className="flex flex-col items-center justify-center text-[#FF5500]/40 group-hover:text-[#FF5500] transition-colors">
+                      <div data-cy="cy-2a6ca8" className="flex flex-col items-center justify-center text-[#FF5500]/40 group-hover:text-[#FF5500] transition-colors">
                         <Lock className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
                         <span className="font-mono text-xs tracking-widest text-center transition-transform group-hover:animate-glitch-skew">DATA<br/>ENCRYPTED</span>
                       </div>
