@@ -33,7 +33,7 @@ export default function TutorialPage() {
           Classified documentation for infiltrating the PiCipher mainframe.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div aria-label="Interactive element 2257" className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Objective */}
           <div className="border border-[#FF5500]/30 bg-black/50 p-6 shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors">
             <Shield className="w-8 h-8 text-[#FF5500] mb-4" />
