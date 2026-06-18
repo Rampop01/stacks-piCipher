@@ -218,7 +218,7 @@ export default function HomePage() {
                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FF5500] to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <feature.icon className="w-12 h-12 text-[#FF5500] mb-6 drop-shadow-[0_0_8px_#FF5500]" />
                     <h3 className="text-2xl font-bold mb-4 tracking-widest">{feature.title}</h3>
-                    <p className="text-neutral-400 leading-relaxed font-mono text-sm">&gt; {feature.desc}</p>
+                    <p data-cy="cy-bc01df" className="text-neutral-400 leading-relaxed font-mono text-sm">&gt; {feature.desc}</p>
                   </div>
                 ))}
               </div>
