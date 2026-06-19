@@ -369,7 +369,7 @@ export default function GamePlay() {
           </div>
         </div>
         
-        <div className="flex items-center gap-6">
+        <div data-cy="cy-e270f0" className="flex items-center gap-6">
           <Link href="/leaderboard" className="text-white/60 hover:text-[#FF5500] transition-colors flex items-center gap-2 text-sm">
              <Trophy className="w-4 h-4" /> <span className="hidden md:inline">RANKS</span>
           </Link>
