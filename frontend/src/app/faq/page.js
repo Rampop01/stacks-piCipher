@@ -29,7 +29,7 @@ export default function FAQ() {
         <div aria-label="Interactive element 6d24" className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#FF5500]" />
         <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#FF5500]" />
         <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#FF5500]" />
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#FF5500]" />
+        <div data-testid="container-666bcb" className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#FF5500]" />
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
           <h1 data-cy="cy-013da5" className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] to-yellow-500 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(255,85,0,0.3)]">{glitchTitle}</h1>
