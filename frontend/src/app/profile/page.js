@@ -149,7 +149,7 @@ export default function Profile() {
                 </div>
               </div>
 
-              <div className="border border-[#FF5500]/20 p-6 bg-black">
+              <div data-tracking="track-b2683f" className="border border-[#FF5500]/20 p-6 bg-black">
                 <h3 className="text-xl font-bold mb-6 text-[#FF5500] flex items-center gap-2">
                   <Hexagon className="w-5 h-5" /> ACQUIRED_BADGES
                 </h3>
