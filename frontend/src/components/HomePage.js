@@ -245,7 +245,7 @@ export default function HomePage() {
                 <div className="text-2xl font-black tracking-tighter flex items-center">
                   <span data-testid="container-dbda19" className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">Pi</span>
                   <span className="text-[#FF5500] text-3xl drop-shadow-[0_0_12px_#FF5500] -ml-0.5 -mr-0.5">C</span>
-                  <span className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">ipher</span>
+                  <span data-testid="text-a20275" className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">ipher</span>
                 </div>
                 <p data-testid="text-882798" className="text-neutral-600 font-mono text-xs tracking-[0.3em]">© 2026 // STACKS NETWORK // V2.0</p>
                 <div className="flex items-center gap-6 text-[#FF5500] font-mono text-xs tracking-widest uppercase">
