@@ -176,7 +176,7 @@ export default function HomePage() {
                     ].map((feature, i) => (
                       <li key={i} className="flex items-center gap-4">
                         <div className="text-[#FF5500] font-black">[ + ]</div>
-                        <span className="text-neutral-300">{feature}</span>
+                        <span data-component-id="7718d57c" className="text-neutral-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
