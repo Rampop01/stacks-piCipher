@@ -66,7 +66,7 @@ export default function VictoryScreen({ profile, networkName }) {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+        <div data-testid="container-70da73" className="flex flex-col sm:flex-row gap-4 w-full justify-center">
           <button 
             onClick={handleShare}
             className="flex items-center justify-center gap-2 gaming-btn py-4 px-8 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-bold font-mono transition-all"
