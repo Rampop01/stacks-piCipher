@@ -442,7 +442,7 @@ export default function GamePlay() {
             TERMINAL_INPUT.exe
           </div>
           
-          <div className="flex flex-col items-center">
+          <div data-testid="container-44ea65" className="flex flex-col items-center">
             <button
               onClick={toggleListening}
               className={`w-20 h-20 rounded-full flex items-center justify-center mb-8 transition-all duration-300 ${
