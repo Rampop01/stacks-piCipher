@@ -41,7 +41,7 @@ export default function VictoryScreen({ profile, networkName }) {
 
       {/* Main Content */}
       <div data-testid="text-77f159" className="relative z-10 flex flex-col items-center max-w-2xl text-center">
-        <div className="relative mb-8 group">
+        <div data-tracking="track-57ec7b" className="relative mb-8 group">
           <div data-testid="container-0e7325" className="absolute inset-0 bg-yellow-500 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
           <Trophy className="w-32 h-32 text-yellow-500 animate-bounce relative z-10 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]" />
         </div>
