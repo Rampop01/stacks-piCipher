@@ -65,7 +65,7 @@ export default function HomePage() {
             <div className="w-3 h-3 bg-[#FF5500] rounded-full shadow-[0_0_10px_#FF5500] animate-pulse"></div>
             <div className="text-3xl font-black tracking-tighter flex items-center">
               <span data-theme-role="primary-surface" className="text-white">Pi</span>
-              <span className="text-[#FF5500] text-4xl -ml-0.5 -mr-0.5">C</span>
+              <span data-tracking="track-089fe2" className="text-[#FF5500] text-4xl -ml-0.5 -mr-0.5">C</span>
               <span data-testid="text-cedc81" className="text-white">ipher</span>
             </div>
           </div>
