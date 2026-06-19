@@ -181,7 +181,7 @@ export default function Profile() {
                   <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                     <div className="flex items-center justify-center w-3 h-3 rounded-full border border-[#FF5500] bg-black text-slate-500 shadow shrink-0 z-10" />
                     <div className="w-[calc(100%-2rem)] md:w-[calc(50%-2rem)] p-4 border border-[#FF5500]/20 bg-[#FF5500]/5 group-hover:border-[#FF5500]/50 transition-colors ml-4 md:ml-0">
-                      <div className="flex justify-between items-start mb-1">
+                      <div data-testid="text-34104b" className="flex justify-between items-start mb-1">
                         <span className="font-bold text-sm text-[#FF5500]">{log.type}</span>
                         <span className="text-[10px] text-neutral-500">{log.time}</span>
                       </div>
