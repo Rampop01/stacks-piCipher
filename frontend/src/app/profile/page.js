@@ -132,7 +132,7 @@ export default function Profile() {
                   <span className="text-xs text-neutral-400 mb-1">TOTAL BOUNTY</span>
                   <span className="font-bold tracking-wider text-[#FF5500] drop-shadow-[0_0_8px_rgba(255,85,0,0.5)]">{derivedStats.totalBounty}</span>
                 </div>
-                <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
+                <div data-component-id="c9875d4b" className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
                   <Zap className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
                   <span data-cy="cy-d2be8b" className="text-xs text-neutral-400 mb-1">PERFECT CLEARS</span>
                   <span data-tracking="track-b0b91b" className="font-bold tracking-wider text-xl text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]">{derivedStats.perfectClears}</span>
