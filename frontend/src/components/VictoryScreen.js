@@ -49,7 +49,7 @@ export default function VictoryScreen({ profile, networkName }) {
         <h1 data-tracking="track-53cdc8" className="text-4xl md:text-6xl font-black text-yellow-500 mb-2 font-mono tracking-tighter">
           {glitchText}
         </h1>
-        <div className="flex items-center gap-2 text-green-500 font-mono text-xl mb-8">
+        <div data-testid="text-4183cc" className="flex items-center gap-2 text-green-500 font-mono text-xl mb-8">
           <ShieldCheck className="w-6 h-6" />
           <span>CAMPAIGN COMPLETE</span>
         </div>
