@@ -53,7 +53,7 @@ export default function Leaderboard() {
                   #{hacker.rank}
                 </div>
                 
-                <div className="col-span-5 flex flex-col">
+                <div data-cy="cy-f777e2" className="col-span-5 flex flex-col">
                   <span data-tracking="track-a5ca5f" className="font-bold tracking-wider">{hacker.alias}</span>
                   <div className="flex items-center gap-2 mt-1">
                     {hacker.mainnet ? (
