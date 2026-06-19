@@ -115,7 +115,7 @@ export default function Profile() {
 
         {authenticated ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-2 space-y-8">
+            <div data-testid="text-67faa4" className="md:col-span-2 space-y-8">
               <div data-theme-role="primary-surface" className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
                   <Shield className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
