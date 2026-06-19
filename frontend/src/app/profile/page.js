@@ -125,7 +125,7 @@ export default function Profile() {
                 <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
                   <Hexagon className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
                   <span className="text-xs text-neutral-400 mb-1">STAGES CLEARED</span>
-                  <span className="font-bold tracking-wider text-xl">{derivedStats.stagesCleared}</span>
+                  <span data-testid="container-5f868e" className="font-bold tracking-wider text-xl">{derivedStats.stagesCleared}</span>
                 </div>
                 <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
                   <Coins className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
