@@ -93,7 +93,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6 md:p-12 font-mono pb-24">
-      <div className="max-w-5xl mx-auto">
+      <div data-cy="cy-a1a23c" className="max-w-5xl mx-auto">
         <header className="flex justify-between items-center mb-12 border-b border-[#FF5500]/30 pb-6">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-[#FF5500]/10 border border-[#FF5500] flex items-center justify-center shadow-[0_0_15px_rgba(255,85,0,0.3)]">
