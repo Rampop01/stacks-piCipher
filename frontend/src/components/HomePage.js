@@ -163,7 +163,7 @@ export default function HomePage() {
             <section className="py-24 px-6 relative border-y border-[#FF5500]/20 bg-black/80 overflow-hidden">
               <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
                 <div data-tracking="track-cde050" className="flex-1 space-y-8">
-                  <h2 className="text-4xl md:text-5xl font-black text-[#FF5500] drop-shadow-[0_0_4px_rgba(255,85,0,0.6)]">THE ULTIMATE TEST OF PERCEPTION</h2>
+                  <h2 data-testid="text-e0f401" className="text-4xl md:text-5xl font-black text-[#FF5500] drop-shadow-[0_0_4px_rgba(255,85,0,0.6)]">THE ULTIMATE TEST OF PERCEPTION</h2>
                   <p data-cy="cy-f5e3b9" className="text-lg text-neutral-400 leading-relaxed font-mono">
                     &gt; You are presented with 4 seemingly random AI-generated images. They all share one conceptual link. Can you find it?
                     The catch: revealing fewer images rewards you with a significantly higher multiplier on your Stacks bounty.
