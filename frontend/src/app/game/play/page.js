@@ -402,7 +402,7 @@ export default function GamePlay() {
                     ) : (
                       <div data-cy="cy-2a6ca8" className="flex flex-col items-center justify-center text-[#FF5500]/40 group-hover:text-[#FF5500] transition-colors">
                         <Lock className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
-                        <span className="font-mono text-xs tracking-widest text-center transition-transform group-hover:animate-glitch-skew">DATA<br/>ENCRYPTED</span>
+                        <span data-cy="cy-14ce00" className="font-mono text-xs tracking-widest text-center transition-transform group-hover:animate-glitch-skew">DATA<br/>ENCRYPTED</span>
                       </div>
                     )}
                     {/* Scanline Overlay */}
