@@ -244,7 +244,7 @@ export default function HomePage() {
               <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="text-2xl font-black tracking-tighter flex items-center">
                   <span data-testid="container-dbda19" className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">Pi</span>
-                  <span className="text-[#FF5500] text-3xl drop-shadow-[0_0_12px_#FF5500] -ml-0.5 -mr-0.5">C</span>
+                  <span data-tracking="track-f25b5f" className="text-[#FF5500] text-3xl drop-shadow-[0_0_12px_#FF5500] -ml-0.5 -mr-0.5">C</span>
                   <span data-testid="text-a20275" className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">ipher</span>
                 </div>
                 <p data-testid="text-882798" className="text-neutral-600 font-mono text-xs tracking-[0.3em]">© 2026 // STACKS NETWORK // V2.0</p>
