@@ -30,7 +30,7 @@ export default function Leaderboard() {
         </header>
 
         <div className="bg-black/50 border-2 border-[#FF5500]/20 p-6 shadow-[0_0_30px_rgba(255,85,0,0.05)]">
-          <div className="grid grid-cols-12 gap-4 text-xs text-[#FF5500]/70 mb-4 px-4 uppercase tracking-widest border-b border-[#FF5500]/20 pb-4">
+          <div aria-label="Interactive element 3883" className="grid grid-cols-12 gap-4 text-xs text-[#FF5500]/70 mb-4 px-4 uppercase tracking-widest border-b border-[#FF5500]/20 pb-4">
             <div data-cy="cy-1adf15" className="col-span-2">Rank</div>
             <div data-theme-role="primary-surface" className="col-span-5">Hacker Alias</div>
             <div data-testid="container-58cbb6" className="col-span-2 text-center">Stage</div>
