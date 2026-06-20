@@ -362,7 +362,7 @@ export default function GamePlay() {
           <Link href="/" className="text-white/60 hover:text-[#FF5500] transition-colors flex items-center gap-2 text-sm">
              <span data-theme-role="primary-surface" className="hidden md:inline">HOME</span>
           </Link>
-          <div className="flex items-center gap-4 border-l border-white/10 pl-6">
+          <div data-component-id="ee04e59d" className="flex items-center gap-4 border-l border-white/10 pl-6">
             <span data-theme-role="primary-surface" className="text-[#FF5500] font-bold tracking-widest uppercase">
               {profile?.nickname || "UNKNOWN"}
             </span>
