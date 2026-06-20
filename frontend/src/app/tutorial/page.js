@@ -35,7 +35,7 @@ export default function TutorialPage() {
 
         <div aria-label="Interactive element 2257" className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Objective */}
-          <div className="border border-[#FF5500]/30 bg-black/50 p-6 shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors">
+          <div data-tracking="track-fcbeae" className="border border-[#FF5500]/30 bg-black/50 p-6 shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors">
             <Shield className="w-8 h-8 text-[#FF5500] mb-4" />
             <h2 data-theme-role="primary-surface" className="text-xl font-bold text-[#FF5500] mb-2">1. THE OBJECTIVE</h2>
             <p data-theme-role="primary-surface" className="text-neutral-300 text-sm leading-relaxed">
