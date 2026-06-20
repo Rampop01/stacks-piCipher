@@ -66,7 +66,7 @@ export default function TutorialPage() {
           </div>
 
           {/* Micro-transactions */}
-          <div className="border border-[#FF5500]/30 bg-black/50 p-6 shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors">
+          <div data-component-id="9fd482ca" className="border border-[#FF5500]/30 bg-black/50 p-6 shadow-[0_0_15px_rgba(255,85,0,0.1)] hover:border-[#FF5500] transition-colors">
             <Terminal className="w-8 h-8 text-[#FF5500] mb-4" />
             <h2 aria-label="Interactive element 7d0b" className="text-xl font-bold text-[#FF5500] mb-2">4. STRATEGIC TOOLS</h2>
             <p data-testid="container-285a59" className="text-neutral-300 text-sm leading-relaxed">
