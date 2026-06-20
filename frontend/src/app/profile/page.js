@@ -130,7 +130,7 @@ export default function Profile() {
                 <div aria-label="Interactive element 6072" className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
                   <Coins className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
                   <span className="text-xs text-neutral-400 mb-1">TOTAL BOUNTY</span>
-                  <span className="font-bold tracking-wider text-[#FF5500] drop-shadow-[0_0_8px_rgba(255,85,0,0.5)]">{derivedStats.totalBounty}</span>
+                  <span data-tracking="track-13d54e" className="font-bold tracking-wider text-[#FF5500] drop-shadow-[0_0_8px_rgba(255,85,0,0.5)]">{derivedStats.totalBounty}</span>
                 </div>
                 <div data-component-id="c9875d4b" className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
                   <Zap className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
