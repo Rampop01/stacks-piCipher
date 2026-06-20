@@ -306,7 +306,7 @@ export default function GamePlay() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-black text-[#FF5500] flex items-center justify-center font-mono text-xl animate-pulse">
+      <div data-testid="container-adaa81" className="min-h-screen bg-black text-[#FF5500] flex items-center justify-center font-mono text-xl animate-pulse">
         [ CONNECTING TO MAINFRAME... ]
       </div>
     );
