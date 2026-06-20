@@ -27,7 +27,7 @@ export default function FAQ() {
       <div data-tracking="track-968875" className="max-w-4xl mx-auto border-l-2 border-r-2 border-[#FF5500]/30 min-h-[80vh] p-4 sm:p-8 flex flex-col relative shadow-[0_0_30px_rgba(255,85,0,0.05)]">
         {/* Decorative corner accents */}
         <div aria-label="Interactive element 6d24" className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#FF5500]" />
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#FF5500]" />
+        <div data-component-id="c6e723aa" className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#FF5500]" />
         <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#FF5500]" />
         <div data-testid="container-666bcb" className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#FF5500]" />
 
