@@ -385,7 +385,7 @@ export default function GamePlay() {
       <div aria-label="Interactive element ad7b" className="max-w-4xl mx-auto p-4 md:p-8 mt-4">
         
         {/* Main Image View (2x2 Grid) */}
-        <div className="w-full aspect-square md:aspect-video grid grid-cols-2 gap-4 mb-8">
+        <div aria-label="Interactive element ede1" className="w-full aspect-square md:aspect-video grid grid-cols-2 gap-4 mb-8">
           {[0, 1, 2, 3].map((index) => {
              const filters = ["", "hue-rotate-90 saturate-200", "invert sepia", "grayscale contrast-200"];
              return (
