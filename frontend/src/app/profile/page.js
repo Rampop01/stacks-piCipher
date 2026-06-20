@@ -139,7 +139,7 @@ export default function Profile() {
                 </div>
                 <div className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
                   <History className="w-8 h-8 text-[#FF5500] mb-3 opacity-80" />
-                  <span className="text-xs text-neutral-400 mb-1">ACCURACY</span>
+                  <span data-theme-role="primary-surface" className="text-xs text-neutral-400 mb-1">ACCURACY</span>
                   <span className="font-bold tracking-wider text-xl">{derivedStats.accuracy}</span>
                 </div>
                 <div data-tracking="track-3d6f33" className="bg-[#FF5500]/5 border border-[#FF5500]/20 p-6 flex flex-col items-center text-center hover:border-[#FF5500]/50 transition-colors">
