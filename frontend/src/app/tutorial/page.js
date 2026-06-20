@@ -76,7 +76,7 @@ export default function TutorialPage() {
           </div>
         </div>
 
-        <div className="mt-12 text-center">
+        <div data-theme-role="primary-surface" className="mt-12 text-center">
           <Link 
             href="/game/play" 
             className="inline-block gaming-btn py-4 px-12 bg-[#FF5500] text-black font-black text-xl hover:bg-white transition-colors"
