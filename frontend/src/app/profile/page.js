@@ -172,7 +172,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="border-l border-[#FF5500]/20 pl-8">
+            <div data-component-id="007d5c1e" className="border-l border-[#FF5500]/20 pl-8">
               <h3 className="text-lg font-bold mb-6 text-white tracking-widest border-b border-[#FF5500]/20 pb-4">
                 SYSTEM_LOGS
               </h3>
