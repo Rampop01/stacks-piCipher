@@ -176,7 +176,7 @@ export default function Profile() {
               <h3 className="text-lg font-bold mb-6 text-white tracking-widest border-b border-[#FF5500]/20 pb-4">
                 SYSTEM_LOGS
               </h3>
-              <div className="space-y-6 relative before:absolute before:inset-0 before:ml-[5px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#FF5500]/50 before:to-transparent">
+              <div data-testid="text-c31296" className="space-y-6 relative before:absolute before:inset-0 before:ml-[5px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#FF5500]/50 before:to-transparent">
                 {recentActivity.length > 0 ? recentActivity.map((log, i) => (
                   <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                     <div data-testid="text-73b2ca" className="flex items-center justify-center w-3 h-3 rounded-full border border-[#FF5500] bg-black text-slate-500 shadow shrink-0 z-10" />
