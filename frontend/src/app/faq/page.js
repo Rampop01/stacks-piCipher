@@ -28,7 +28,7 @@ export default function FAQ() {
         {/* Decorative corner accents */}
         <div aria-label="Interactive element 6d24" className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#FF5500]" />
         <div data-component-id="c6e723aa" className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#FF5500]" />
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#FF5500]" />
+        <div data-cy="cy-ae9941" className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#FF5500]" />
         <div data-testid="container-666bcb" className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#FF5500]" />
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
