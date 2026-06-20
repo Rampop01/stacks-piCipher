@@ -437,7 +437,7 @@ export default function GamePlay() {
         )}
 
         {/* Input Area */}
-        <div className="w-full p-6 border border-[#FF5500]/40 backdrop-blur-lg bg-black/60 relative shadow-[0_0_30px_rgba(255,85,0,0.1)]">
+        <div data-testid="text-538068" className="w-full p-6 border border-[#FF5500]/40 backdrop-blur-lg bg-black/60 relative shadow-[0_0_30px_rgba(255,85,0,0.1)]">
           <div className="absolute -top-3 left-4 bg-black px-2 text-xs text-[#FF5500] font-mono border border-[#FF5500]/50">
             TERMINAL_INPUT.exe
           </div>
