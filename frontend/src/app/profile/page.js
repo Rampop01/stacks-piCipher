@@ -183,7 +183,7 @@ export default function Profile() {
                     <div className="w-[calc(100%-2rem)] md:w-[calc(50%-2rem)] p-4 border border-[#FF5500]/20 bg-[#FF5500]/5 group-hover:border-[#FF5500]/50 transition-colors ml-4 md:ml-0">
                       <div data-testid="text-34104b" className="flex justify-between items-start mb-1">
                         <span className="font-bold text-sm text-[#FF5500]">{log.type}</span>
-                        <span className="text-[10px] text-neutral-500">{log.time}</span>
+                        <span data-component-id="a65971ff" className="text-[10px] text-neutral-500">{log.time}</span>
                       </div>
                       <p aria-label="Interactive element aeed" className="text-xs text-neutral-300">
                         {log.stage ? `Cleared Stage ${log.stage}` : "Withdrawal processed"}
