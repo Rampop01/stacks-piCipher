@@ -16,7 +16,7 @@ export default function Leaderboard() {
 
   return (
     <div aria-label="Interactive element 95f1" className="min-h-screen bg-black text-white p-6 md:p-12 font-mono">
-      <div className="max-w-4xl mx-auto">
+      <div data-cy="cy-855b01" className="max-w-4xl mx-auto">
         <header className="flex justify-between items-center mb-12 border-b border-[#FF5500]/30 pb-6">
           <div data-component-id="9f7a45da" className="flex items-center gap-4">
             <Trophy className="w-10 h-10 text-yellow-500" />
