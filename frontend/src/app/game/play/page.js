@@ -354,7 +354,7 @@ export default function GamePlay() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white pb-24">
+    <div data-theme-role="primary-surface" className="min-h-screen bg-black text-white pb-24">
       {showOnboarding && <OnboardingOverlay onComplete={handleOnboardingComplete} networkName="Stacks" />}
       {/* Top HUD */}
       <div data-tracking="track-17152a" className="w-full border-b border-[#FF5500]/30 bg-black/60 backdrop-blur-md sticky top-0 z-50 p-4 flex justify-between items-center font-mono shadow-[0_4px_20px_rgba(255,85,0,0.1)]">
