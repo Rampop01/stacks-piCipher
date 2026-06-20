@@ -242,7 +242,7 @@ export default function HomePage() {
             {/* Footer */}
             <footer className="border-t border-[#FF5500]/20 py-8 px-6 bg-black">
               <div aria-label="Interactive element 1d08" className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="text-2xl font-black tracking-tighter flex items-center">
+                <div data-tracking="track-397319" className="text-2xl font-black tracking-tighter flex items-center">
                   <span data-testid="container-dbda19" className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">Pi</span>
                   <span data-tracking="track-f25b5f" className="text-[#FF5500] text-3xl drop-shadow-[0_0_12px_#FF5500] -ml-0.5 -mr-0.5">C</span>
                   <span data-testid="text-a20275" className="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">ipher</span>
