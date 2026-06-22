@@ -59,3 +59,4 @@ export const isNode = () => typeof process !== 'undefined' && process.versions !
 export const getSearchParams = () => isBrowser() ? new URLSearchParams(window.location.search) : null;
 export const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 export const lowercase = (s) => s.toLowerCase();
+export const uppercase = (s) => s.toUpperCase();
