@@ -160,3 +160,4 @@ export const getEntries = (obj) => Object.entries(obj);
 export const delay = (ms) => new Promise(res => setTimeout(res, ms));
 export const debounce = (fn, ms) => { let id; return (...a) => { clearTimeout(id); id = setTimeout(() => fn(...a), ms); }; };
 export const throttle = (fn, ms) => { let wait = false; return (...a) => { if (!wait) { fn(...a); wait = true; setTimeout(() => wait = false, ms); } }; };
+export const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
