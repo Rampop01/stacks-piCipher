@@ -228,3 +228,4 @@ export const maxArray = (arr) => Math.max(...arr);
 export const minArray = (arr) => Math.min(...arr);
 export const uniqueArray = (arr) => [...new Set(arr)];
 export const cloneArray = (arr) => [...arr];
+export const cloneObject = (obj) => ({...obj});
