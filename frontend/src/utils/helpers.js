@@ -192,3 +192,4 @@ export const degreesToRadians = (deg) => deg * (Math.PI / 180);
 export const radiansToDegrees = (rad) => rad * (180 / Math.PI);
 export const sumArray = (arr) => arr.reduce((a, b) => a + b, 0);
 export const avgArray = (arr) => arr.length ? sumArray(arr) / arr.length : 0;
+export const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
