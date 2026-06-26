@@ -194,3 +194,4 @@ export const sumArray = (arr) => arr.reduce((a, b) => a + b, 0);
 export const avgArray = (arr) => arr.length ? sumArray(arr) / arr.length : 0;
 export const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 export const lowercase = (s) => s.toLowerCase();
+export const uppercase = (s) => s.toUpperCase();
